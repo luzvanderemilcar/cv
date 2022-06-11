@@ -12,14 +12,15 @@ background-color: var(--body-color);
 color: #000000;
 font-family: ;
 width: 95%;
-margin: auto;
+margin: 2rem;
 }
 
 .navbar  {
 background-color:  #E2E1FF;
 color: blue;
 font-family: creteround-regular;
-text-transform: uppercase;
+/*
+text-transform: uppercase;*/
 position: fixed;
 top: 0px;
 left: 0px;
@@ -36,7 +37,7 @@ margin-right: 1rem;
 }
 
 .focus_nav {
-background-color: var(body-color);
+background-color: #E4E4E4;
 color: black;
 font-weight: bold;
 padding: .5rem;
