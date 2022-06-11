@@ -3,7 +3,8 @@ size: 12px;
 }
 
 body {
-background-color: #FDEFF5;
+margin-top: 4rem;
+margin: auto;
 }
 
 h3 {
@@ -11,9 +12,9 @@ margin-left: 2rem;
 }
 
 main {
-width: 95%;
-margin-top: 4rem;
-margin-left: 1rem;
+position: aboslute;
+left: 2%;
+width: 96%;
 }
 
 .navbar  {
