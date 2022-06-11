@@ -3,7 +3,7 @@ size: 12px;
 }
 
 body {
-margin-top: 4rem;
+margin-top: 8rem;
 margin: auto;
 }
 
@@ -11,14 +11,21 @@ h3 {
 margin-left: 2rem;
 }
 
-main {
-position: aboslute;
-left: 2%;
+#home_main {
+margin-top: 10rem;
 width: 96%;
 }
 
+#projects_main {
+margin-top: 10rem;
+}
+
+#ontacts_main {
+margin-top: 10rem;
+}
+
 .navbar  {
-background-color:  #F0FFF5;
+background-color:  #0C47A1;
 font-family: creteround-regular;
 text-transform: uppercase;
 position: fixed;
@@ -34,16 +41,19 @@ justify-content: space-around;
 margin-left: 1rem;
 }
 
-nav ul li a {
-text-decoration: none; 
+nav ul li {
 color: gray;
 }
 
+nav ul li a {
+text-decoration: none;
+}
+
 .focus_nav {
-background-color: #FDEFF5;
+background-color: white;
 color: black;
 font-weight: bold;
-padding: 5px 2px 10px 2px;
+padding: 0.5rem 0.5rem 2rem 0.5rem ;
 
 }
 
