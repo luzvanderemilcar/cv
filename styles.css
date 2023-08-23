@@ -1,101 +1,202 @@
+:root {
+  /*Color Variables*/
+  --primary-color: #680000;
+  --light-color: #F8F8F8;
+  --dark-color: #020202;
+  --soft-color: #495057;
+
+  --secondary-color: #444444;
+  --yellow-color: #ffc107;
+
+  /*Font Families*/
+  --heading-font: "Montserrat-Bold";
+  --body-font: "Montserrat";
+  --specific-font: "Ubuntu";
+  --light-font: "Montserrat-Light";
+}
+
 html {
-size: 12px;
-}
-
-body {
-margin-top: 8rem;
-margin: auto;
-}
-
-h3 {
-margin-left: 2rem;
-}
-
-#home_main {
-margin-top: 10rem;
-width: 96%;
-}
-
-#projects_main {
-margin-top: 10rem;
-}
-
-#ontacts_main {
-margin-top: 10rem;
-}
-
-.navbar  {
-background-color:  #0C47A1;
-font-family: creteround-regular;
-text-transform: uppercase;
-position: fixed;
-top: 0px;
-left: 0px;
-width: 100%;
-}
-
-nav ul {
-display: flex;
-flex-direction: row;
-justify-content: space-around;
-margin-left: 1rem;
-}
-
-nav ul li {
-color: gray;
-}
-
-nav ul li a {
-text-decoration: none;
-}
-
-.focus_nav {
-background-color: white;
-color: black;
-font-weight: bold;
-padding: 0.5rem 0.5rem 2rem 0.5rem ;
-
-}
-
-main li {
-margin-bottom: 1rem;}
-
-#home_header_div {
-width: 90%;
-min-height: 10rem;
-display: grid;
-grid-template-columns: 1fr 1fr;
-;
-}
-
-#home_header_div_child {
-font-family: creteround-regular;
-grid-column: 2/3;
+  scroll-behavior: smooth;
 }
 
 
-#header-img {border:2px solid #E4E4E4;
-width: 100%; height: auto; radius: 50%;
-grid-column: 1/2;
-justify-self: center;
-align-self: center;
+li div {
+  margin-bottom: 8%;
 }
 
-.contact-type { text-weight: bold;
+.container-fluid {
+  padding: 3% 7%;
 }
 
-.contact-data { font-style: italic;
+.container {
+  margin: 3%;
 }
 
-footer {
-position: relative;
+.container ul.list-head-section {
+  padding: 2%;
 }
 
-footer p {
-position: absolute;
-/*
-text-align: center;*/
-right: 25%;
+.dark-section {
+  background-color: var(--primary-color, #020202);
+  color: var(--light-color, #f8f8f8);
 }
 
+.white-section {
+  background-color: var(--light-color, #f8f8f8);
+  color: var(--dark-color, #020202);
+}
 
+.big-heading {
+  font-size: 3rem;
+  line-height: 1.5;
+  margin-bottom: 5%;
+}
+
+.section-heading {
+  font-size: 1.5rem;
+  font-family: var(--specific-font, "Times New Roman");
+  line-height: 1.5;
+  padding: auto 5%;
+  text-transform: uppercase;
+}
+
+/* Section Titre */
+
+#titre {
+  margin-bottom: 5%;
+}
+
+#titre-info {
+  padding-bottom: inherit;
+}
+
+#titre .section-heading {
+  padding: 2% 0;
+}
+
+.image-div {
+  text-align: center;
+}
+
+#titre img {
+  width: 50%;
+  border-radius: 50%;
+}
+
+#outline-box {
+  margin: 5%;
+  border: 1px solid;
+  border-color: var(--yellow-color);
+  border-top-style: none;
+  margin: 5% auto 3%;
+  max-width: 300px;
+}
+
+#outline-box li {
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.header-div {
+  background-color: var(--secondary-color, #020202);
+  color: var(--light-color, #f8f8f8);
+  margin-bottom: 5%;
+  position: relative;
+  display: grid;
+  text-align: center;
+  grid-template-columns: 20% 80%;
+  max-width: 300px;
+}
+.header-div div {
+  display: flex;
+  align-item: center;
+  justify-item: start;
+  align-items: center;
+  justify-content: center;
+  border : 1px solid darkgray;
+}
+
+.header-div div h2 {
+  margin : 0;
+  justify-self: flex-;
+}
+
+#formation-body {
+  padding : inherit;
+}
+
+/* Section Competences */
+
+.cp-hr {
+  margin: 0;
+}
+
+#competence-body {
+  padding: inherit;
+}
+
+#competence-body div {
+  margin: 5% auto;
+}
+
+/* Section Experiences */
+
+#experience {
+  margin-bottom: 2em;
+}
+
+#experience-body {
+  padding: inherit;
+}
+
+.workplace .header p {
+  text-shadow: 0 0 black;
+}
+
+#to-top-link {
+  position: fixed;
+  bottom: 15%;
+  margin-left: 80%;
+  visibility: hidden;
+}
+#to-top-link .to-top-icon {
+  color: var(--primary-color, #020202);
+  background-color: white;
+  border-radius : 50%;
+  font-size: 40px;
+}
+
+#footer {
+  text-align: center;
+  background-color: var(--secondary-color, #020202);
+  color: var(--light-color, white);
+  position: absolute;
+  left: 0;
+  width: 100vw;
+}
+
+#footer div {
+  margin-bottom: 3%;
+}
+
+.footer-icon {
+  margin: 2%;
+}
+
+/*@media (min-width : 800px) {
+  #intro {
+    display: grid;
+    grid-template-areas: 
+  "formation bref"
+      "formation formation";
+  }
+  #bref {
+    float: right;
+    width : 25%;
+  }
+  
+  #formation {
+    float: left;
+    width: 75%;
+  }
+}*/
