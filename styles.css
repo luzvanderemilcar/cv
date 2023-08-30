@@ -19,6 +19,9 @@ html {
   scroll-behavior: smooth;
 }
 
+section {
+    padding-top: 2%;
+}
 
 li div {
   margin-bottom: 8%;
@@ -74,12 +77,14 @@ li div {
   padding: 2% 0;
 }
 
-.image-div {
-  text-align: center;
-}
 
-#titre img {
-  width: 50%;
+#titre-info .image-div {
+  margin-left: 3%;
+  width: 100px;
+  height:  100px;
+  background-image: url("Luzvander.jpg");
+  background-size: 100px;
+  border: 1px solid var(--yellow-color, #ffc107);
   border-radius: 50%;
 }
 
@@ -98,11 +103,11 @@ li div {
 }
 
 .header-div {
-  background-color: var(--secondary-color, #020202);
-  color: var(--light-color, #f8f8f8);
+  color: var(--secondary-color, #020202);
   margin-bottom: 5%;
   position: relative;
   display: grid;
+  grid-gap: 2px;
   text-align: center;
   grid-template-columns: 20% 80%;
   max-width: 300px;
@@ -114,17 +119,24 @@ li div {
   align-items: center;
   justify-content: center;
   border : 1px solid darkgray;
+  border-radius: 10%;
 }
 
 .header-div div h2 {
   margin : 0;
-  justify-self: flex-;
+  justify-self: flex-end;
 }
 
 #formation-body {
   padding : inherit;
 }
 
+#formation-body h4 {
+  display: inline-block;
+  color : var(--light-color, white);
+  background-color: var(--secondary-color, darkgray);
+  padding-inline: 15px;
+}
 /* Section Competences */
 
 .cp-hr {
@@ -139,6 +151,17 @@ li div {
   margin: 5% auto;
 }
 
+/* chart Bar*/
+
+.graph-title {
+  font-family: "Montserrat";
+  font-style: italic;
+  font-weight: bold;
+}
+
+svg.dev-competence {
+  margin-bottom : 15px;
+}
 /* Section Experiences */
 
 #experience {
@@ -181,22 +204,5 @@ li div {
 
 .footer-icon {
   margin: 2%;
+  color: white;
 }
-
-/*@media (min-width : 800px) {
-  #intro {
-    display: grid;
-    grid-template-areas: 
-  "formation bref"
-      "formation formation";
-  }
-  #bref {
-    float: right;
-    width : 25%;
-  }
-  
-  #formation {
-    float: left;
-    width: 75%;
-  }
-}*/

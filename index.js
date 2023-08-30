@@ -28,12 +28,13 @@ function excludeButtonIdSelector(buttonId) {
 
 // Setting the width of the hr with .cp-hr class
 $(".cp-hr").css("width", getWidthValue("button.cp-button"));
+
 function getWidthValue(selector) {
-  let value  = 0;
+  let value = 0;
   document.querySelectorAll(selector).forEach((btn) => {
-     value += parseFloat(btn.offsetWidth);
-});
-return value;
+    value += parseFloat(btn.offsetWidth);
+  });
+  return value;
 }
 
 $(".cp-button").click(function() {
@@ -61,8 +62,10 @@ function competenceSet(id) {
   }
   $("#competence-body div").html(DOMPurify.sanitize(marked.parse(competences)));
 }
- $("#outline-box li").on("click", scrollToCompetence);
- 
+$("#outline-box li").on("click", function () { //Identify which button was clicked
+  let currentId = $(this).attr("id").match(/\w+(?=[-]\w+)/g)[0];
+  scrollToElement("#competence", currentId)});
+
 //Change the visibility of ToUp button
 document.addEventListener("scroll", () => {
   if (topView.getBoundingClientRect().bottom > 0) {
@@ -77,10 +80,103 @@ document.addEventListener("scroll", () => {
   }
 });
 
-function scrollToCompetence() {
-    //Identify which button was clicked
-    let currentId = $(this).attr("id").match(/\w+(?=[-]\w+)/g)[0];
-    competenceSet(currentId);
-    document.querySelector("#competence").scrollIntoView();
+function scrollToElement(selector, currentId) {
+  competenceSet(currentId);
+  document.querySelector(selector).scrollIntoView();
 }
 
+// D3 graphic Bar chart
+
+const dataDev = [["HTML", 85], ["CSS", 75], ["JavaScript", 70], ["jQuery", 50], ["Bootstrap", 60], ["React", 75], ["D3", 45], ["Redux", 55]];
+
+let sectionWidth = parseFloat(document.querySelector("#competence").offsetWidth);
+let [h, w, padding, topPadding] = [300, 650, 20, 40];
+// Change the width according to viewport section
+if (sectionWidth < w) {
+  w = sectionWidth - 2 * padding;
+}
+const [mainColor, redColor, yellowColor, greenColor] = ["#020202", "#f00", "yellow", "#0f0"];
+
+//Setting the scale
+const xScale = d3.scaleLinear()
+  .domain([0, 100])
+  .range([0, w - 2 * padding]);
+
+const yScale = d3.scaleLinear()
+  .domain([0, dataDev.length])
+  .range([topPadding, h - padding]);
+
+const svgDev = d3.select("#bar-chart")
+  .append("svg")
+  .attr("class", "dev-competence")
+  .attr("width", w)
+  .attr("height", h)
+  .style("background-color", "white");
+
+svgDev.append("g")
+  .attr("class", "title");
+
+svgDev.select(".title")
+  .append("text")
+  .html("Web développement - Graphique")
+  .attr("x", w / 2)
+  .attr("y", topPadding / 2)
+  .attr("text-anchor", "middle")
+  .attr("fill", "darkgray")
+  .attr("class", "graph-title")
+  .style("font-size", 10);
+
+// Rectangle element for data-key-name
+svgDev.selectAll("rect")
+  .data(dataDev)
+  .enter()
+  .append("rect")
+  .attr("width", w - 2 * padding)
+  .attr("height", 10)
+  .attr("x", padding)
+  .attr("y", (d, i) => yScale(i))
+  .attr("fill", `${mainColor}`);
+
+// Path for triangle lever
+svgDev.selectAll("path")
+  .data(dataDev)
+  .enter()
+  .append("path")
+  .attr("d", (d, i) => `M ${xScale(d[1]) + padding -7} ${yScale(i) - 8 } L${xScale(d[1]) + padding + 7} ${yScale(i) - 8} L${xScale(d[1]) + padding} ${yScale(i) + 6} z`)
+  .attr("fill", d => {
+    return d[1] < 40 ? redColor :
+      d[1] > 40 && d[1] < 60 ? yellowColor : greenColor;
+  })
+  .attr("stroke", yellowColor)
+  .attr("class", "triangle-lever");
+
+//Key name text element
+svgDev.selectAll("text.data-key-name")
+  .data(dataDev)
+  .enter()
+  .append("text")
+  .attr("class", "data-key-name")
+  .text(d => d[0])
+  .attr("x", padding + 2)
+  .attr("y", (d, i) => yScale(i) + 8.5)
+  .attr("fill", "white")
+  .style("font-size", 10);
+
+// Setting percentage 
+svgDev.selectAll("text.data-key-percent")
+  .data(dataDev)
+  .enter()
+  .append("text")
+  .attr("class", "data-key-pourcent")
+  .text(d => `${d[1]}%`)
+  .attr("x", d => xScale(d[1]) + padding + 7)
+  .attr("y", (d, i) => yScale(i) - 5)
+  .style("font-size", 8);
+
+
+// Setting the bottom axis
+const xAxis = d3.axisBottom(xScale);
+
+svgDev.append("g")
+  .attr("transform", `translate(${padding}, ${h - padding})`)
+  .call(xAxis);
