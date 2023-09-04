@@ -93,7 +93,7 @@ let sectionWidth = parseFloat(document.querySelector("#competence").offsetWidth)
 let [h, w, padding, topPadding] = [300, 650, 20, 40];
 // Change the width according to viewport section
 if (sectionWidth < w) {
-  w = sectionWidth - 2 * padding;
+  w = sectionWidth - 2.5 * padding;
 }
 const [mainColor, redColor, yellowColor, greenColor] = ["#020202", "#f00", "yellow", "#0f0"];
 
@@ -167,7 +167,7 @@ svgDev.selectAll("text.data-key-percent")
   .data(dataDev)
   .enter()
   .append("text")
-  .attr("class", "data-key-pourcent")
+  .attr("class", "data-key-percent")
   .text(d => `${d[1]}%`)
   .attr("x", d => xScale(d[1]) + padding + 7)
   .attr("y", (d, i) => yScale(i) - 5)
