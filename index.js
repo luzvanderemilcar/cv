@@ -7,7 +7,18 @@ let desCompetences = "#### Design graphique\n----------\n\n J'ai débuté dans l
 let devCompetences = "#### Développement web\n----------\n\nJe peux travailler sur des projets de front-end développement pour créer des sites web réactifs, des applications web et autres. J'utilise plusieurs langages de programmation et de librairies pour réaliser le projet avec une approche de \"separation of concerns\".\n- HTML : création du squelette du projet et de son contenu statique.\n- CSS : designer l'interface de l'utilisateur avec les éléments graphiques et d'accessibilité.\n- JavaScript : utiliser le langage pour gérer la réactivité par rapport à l'utilisateur. Créer des algorithmes et des programmes pour le traitement des données.\nJe peux utiliser divers libraries comme Bootstrap, FontAwesome, jQuery, Animate.js, React, Redux pour accélérer le développement du projet.";
 
 let competences;
-
+const dataAdm = {
+  title : "Administration - Skills",
+  data : [["Problem solving", 70], ["Planning", 75], ["Communication", 80], ["Marketing", 70], ["Strategy", 60]]
+  };
+const dataDev = {
+  title : "Development - Skills", 
+  data : [["HTML", 85], ["CSS", 75], ["JavaScript", 70], ["jQuery", 50], ["Bootstrap", 60], ["React", 75], ["D3", 45], ["Redux", 55]]
+  };
+const dataDes = {
+  title: "Design - Skills",
+  data : [["Logo", 50], ["Flyer", 75], ["Banner", 50], ["Card", 70], [" ", 0], ["PixelLab", 75], ["Photoshop", 45], ["UI", 55]]
+  };
 // Disable headerIds and mangle options for marked text
 marked.use({
   headerIds: false,
@@ -51,20 +62,33 @@ function competenceSet(id) {
 
   switch (id) {
     case 'adm':
+      {
       competences = admCompetences;
+      d3.select("#bar-chart").text("");
+      setChart(dataAdm);
+      }
       break;
     case 'des':
+      {
       competences = desCompetences;
+      d3.select("#bar-chart").text("");
+      setChart(dataDes);
+  }
       break;
     case 'dev':
+      {
       competences = devCompetences;
+      d3.select("#bar-chart").text("");
+      setChart(dataDev);
+      }
       break;
   }
   $("#competence-body div").html(DOMPurify.sanitize(marked.parse(competences)));
 }
 $("#outline-box li").on("click", function () { //Identify which button was clicked
   let currentId = $(this).attr("id").match(/\w+(?=[-]\w+)/g)[0];
-  scrollToElement("#competence", currentId)});
+  scrollToElement("#competence", currentId);
+});
 
 //Change the visibility of ToUp button
 document.addEventListener("scroll", () => {
@@ -87,38 +111,40 @@ function scrollToElement(selector, currentId) {
 
 // D3 graphic Bar chart
 
-const dataDev = [["HTML", 85], ["CSS", 75], ["JavaScript", 70], ["jQuery", 50], ["Bootstrap", 60], ["React", 75], ["D3", 45], ["Redux", 55]];
-
 let sectionWidth = parseFloat(document.querySelector("#competence").offsetWidth);
 let [h, w, padding, topPadding] = [300, 650, 20, 40];
 // Change the width according to viewport section
 if (sectionWidth < w) {
-  w = sectionWidth - 2.5 * padding;
+  w = sectionWidth - 2 * padding;
 }
 const [mainColor, redColor, yellowColor, greenColor] = ["#020202", "#f00", "yellow", "#0f0"];
 
-//Setting the scale
-const xScale = d3.scaleLinear()
-  .domain([0, 100])
-  .range([0, w - 2 * padding]);
 
-const yScale = d3.scaleLinear()
-  .domain([0, dataDev.length])
-  .range([topPadding, h - padding]);
-
-const svgDev = d3.select("#bar-chart")
+function setChart(dataSrc) {
+  let dataset = dataSrc.data;
+  let title = dataSrc.title;
+  
+  //Setting the scale
+  const xScale = d3.scaleLinear()
+    .domain([0, 100])
+    .range([0, w - 2 * padding]);
+  
+  const yScale = d3.scaleLinear()
+    .domain([0, dataset.length])
+    .range([topPadding, h - padding]);
+const svg = d3.select("#bar-chart")
   .append("svg")
-  .attr("class", "dev-competence")
+  .attr("class", "competence")
   .attr("width", w)
   .attr("height", h)
   .style("background-color", "white");
 
-svgDev.append("g")
+svg.append("g")
   .attr("class", "title");
 
-svgDev.select(".title")
+svg.select(".title")
   .append("text")
-  .html("Web développement - Graphique")
+  .html(title)
   .attr("x", w / 2)
   .attr("y", topPadding / 2)
   .attr("text-anchor", "middle")
@@ -127,32 +153,38 @@ svgDev.select(".title")
   .style("font-size", 10);
 
 // Rectangle element for data-key-name
-svgDev.selectAll("rect")
-  .data(dataDev)
+svg.selectAll("rect")
+  .data(dataset)
   .enter()
   .append("rect")
   .attr("width", w - 2 * padding)
   .attr("height", 10)
   .attr("x", padding)
   .attr("y", (d, i) => yScale(i))
-  .attr("fill", `${mainColor}`);
+  .attr("fill", d => d[1] ==0 ? "none"  :`${mainColor}`);
 
 // Path for triangle lever
-svgDev.selectAll("path")
-  .data(dataDev)
+svg.selectAll("path")
+  .data(dataset)
   .enter()
   .append("path")
-  .attr("d", (d, i) => `M ${xScale(d[1]) + padding -7} ${yScale(i) - 8 } L${xScale(d[1]) + padding + 7} ${yScale(i) - 8} L${xScale(d[1]) + padding} ${yScale(i) + 6} z`)
+  .attr("d", (d, i) => {
+    if (d[1] > 0) { 
+      return `M ${xScale(d[1]) + padding -7} ${yScale(i) - 8 } L${xScale(d[1]) + padding + 7} ${yScale(i) - 8} L${xScale(d[1]) + padding} ${yScale(i) + 6} z`;
+    }
+      })
   .attr("fill", d => {
-    return d[1] < 40 ? redColor :
-      d[1] > 40 && d[1] < 60 ? yellowColor : greenColor;
+    return d[1] ==0 ? "none" 
+    :d[1] < 40 ? redColor
+    :d[1] > 40 && d[1] < 60 ? yellowColor
+    :greenColor;
   })
   .attr("stroke", yellowColor)
   .attr("class", "triangle-lever");
 
 //Key name text element
-svgDev.selectAll("text.data-key-name")
-  .data(dataDev)
+svg.selectAll("text.data-key-name")
+  .data(dataset)
   .enter()
   .append("text")
   .attr("class", "data-key-name")
@@ -163,12 +195,12 @@ svgDev.selectAll("text.data-key-name")
   .style("font-size", 10);
 
 // Setting percentage 
-svgDev.selectAll("text.data-key-percent")
-  .data(dataDev)
+svg.selectAll("text.data-key-percent")
+  .data(dataset)
   .enter()
   .append("text")
-  .attr("class", "data-key-percent")
-  .text(d => `${d[1]}%`)
+  .attr("class", "data-key-pourcent")
+  .text(d => d[1] == 0 ?  '' :`${d[1]}%`)
   .attr("x", d => xScale(d[1]) + padding + 7)
   .attr("y", (d, i) => yScale(i) - 5)
   .style("font-size", 8);
@@ -177,6 +209,10 @@ svgDev.selectAll("text.data-key-percent")
 // Setting the bottom axis
 const xAxis = d3.axisBottom(xScale);
 
-svgDev.append("g")
+svg.append("g")
   .attr("transform", `translate(${padding}, ${h - padding})`)
   .call(xAxis);
+}
+
+//Default D3 Graph
+setChart(dataAdm);
