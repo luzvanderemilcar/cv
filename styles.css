@@ -3,7 +3,7 @@
   --primary-color: #680000;
   --light-color: #F8F8F8;
   --dark-color: #020202;
-  --soft-color: #495057;
+  --soft-color: wheat;
 
   --secondary-color: #444444;
   --yellow-color: #ffc107;
@@ -103,8 +103,9 @@ li div {
 }
 
 .header-div {
+  background-color: darkgray;
   color: var(--secondary-color, #020202);
-  margin-bottom: 5%;
+  margin-bottom: 7%;
   position: relative;
   display: grid;
   grid-gap: 2px;
@@ -118,13 +119,17 @@ li div {
   justify-item: start;
   align-items: center;
   justify-content: center;
-  border : 1px solid darkgray;
+}
+
+.icon-div {
+  border : 1px solid var(--soft-color, wheat);
   border-radius: 10%;
 }
 
 .header-div div h2 {
   margin : 0;
-  justify-self: flex-end;
+  justify-self: flex-start;
+  text-decoration : underline;
 }
 
 #formation-body {
@@ -179,14 +184,16 @@ svg.dev-competence {
 #to-top-link {
   position: fixed;
   bottom: 15%;
-  margin-left: 80%;
+  left: 80%;
   visibility: hidden;
+  text-align : center ;
 }
 #to-top-link .to-top-icon {
   color: var(--primary-color, #020202);
   background-color: white;
   border-radius : 50%;
   font-size: 40px;
+  display : block;
 }
 
 #footer {
