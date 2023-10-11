@@ -32,19 +32,6 @@ marked.use({
   mangle: false
 });
 
-//Create a combined selector excluding the id specified
-function excludeButtonIdSelector(buttonId) {
-  const buttonIds = [];
-  let buttonList = $("button.cp-button");
-  for (let btn of buttonList) {
-    buttonIds.push(btn.getAttribute("id"));
-  }
-  let excludingButtonSelector = buttonIds.filter(item => {
-    return item != buttonId;
-  });
-  return `#${excludingButtonSelector.join(",#")}`;
-}
-
 // Setting the width of the hr with .cp-hr class for competences switches
 $(".cp-hr").css("width", getWidthValue("button.cp-button"));
 
@@ -60,21 +47,15 @@ function getWidthValue(selector) {
 $(".cp-button").click(function() {
   //Identify which button was clicked
   let currentId = $(this).attr("id");
+  if ($("#adm").hasClass("btn-dark")) {
+    $("#adm").removeClass("btn-dark");
+    $("#adm").addClass("btn-outline-light");
+    }
   competenceSet(currentId);
-});
-
-// Click event listener for #outline-box li elements
-$("#outline-box li").on("click", function() { //Identify which button was clicked
-  let currentId = $(this).attr("id").match(/\w+(?=[-]\w+)/g)[0];
-  scrollToElement("#competence", currentId);
 });
 
 //Content change based on adm, des or dev value
 function competenceSet(id) {
-  //Change the clicked button outlook
-  $(excludeButtonIdSelector(id)).removeClass("btn-dark");
-  $(`#${id}`).addClass("btn-dark");
-
   switch (id) {
     case 'adm':
     {
@@ -107,21 +88,13 @@ document.addEventListener("scroll", () => {
   scrollingDown = lastKnownScrollPosition < window.scrollY;
   
   if (topView.getBoundingClientRect().bottom > 0 || scrollingDown) {
-    
-    // the following condition is to avoid overriding with the same value of  $("#to-top-link").css("visibility") ==  "hidden"
-   if ($("#to-top-link").css("visibility") == "visible" || $("#to-top-link").css("visibility") == "initial") {
-
       $("#to-top-link").css("visibility", "hidden");
-    }
-  }
-
-  else {
+  } else {
      if (!scrollingDown) {
-    if ($("#to-top-link").css("visibility") == "hidden") {
       $("#to-top-link").css("visibility", "visible");
-    } 
      }
   }
+  
   //Update lastKnownScrollPosition to the current scrollY position 
    lastKnownScrollPosition = window.scrollY;
 });

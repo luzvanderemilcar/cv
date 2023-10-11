@@ -27,6 +27,18 @@ li div {
   margin-bottom: 8%;
 }
 
+.btn-outline-light.focus, .btn-outline-light:focus,.btn-dark  {
+  background-color: var(--primary-color,#680000) !important;
+  color: var(--light-color) !important;
+}
+
+.btn-dark.focus, .btn-dark:focus, .btn-outline-light {
+  box-shadow : unset !important;
+  background-color : var(--light-color, #F2F2F2) !important;
+  color : var(--primary-color, #680000) !important;
+  border-color: var(--primary-color, #680000) !important;
+}
+
 .container-fluid {
   padding: 3% 7%;
 }
@@ -40,7 +52,7 @@ li div {
 }
 
 .dark-section {
-  background-color: var(--primary-color, #020202);
+  background-color: var(--secondary-color, #020202);
   color: var(--light-color, #f8f8f8);
 }
 
@@ -60,7 +72,42 @@ li div {
   font-family: var(--specific-font, "Times New Roman");
   line-height: 1.5;
   padding: auto 5%;
-  text-transform: uppercase;
+}
+
+.header-div {
+  background-color: darkgray;
+  color: var(--secondary-color, #020202);
+  margin-bottom: 7%;
+  padding : 10px 10px 10px 5px;
+  position: relative;
+  display: grid;
+  grid-gap: 2px;
+  text-align: center;
+  grid-template-columns: 20% 80%;
+  max-width: 300px;
+  min-width: 160px;
+}
+
+.header-div div {
+  display: flex;
+  align-item: center;
+  justify-item: center;
+  align-items: center;
+  justify-content: center;
+  padding-right: 15%;
+}
+
+.icon-div {
+  border: 1px solid var(--soft-color, wheat);
+  max-width: 40px;
+  border-radius: 10%;
+  text-align: center;
+}
+
+.header-div div h2 {
+  margin : 0;
+  justify-self: flex-start;
+text-transform: uppercase;
 }
 
 /* Section Titre */
@@ -76,7 +123,6 @@ li div {
 #titre .section-heading {
   padding: 2% 0;
 }
-
 
 #titre-info .image-div {
   margin-left: 3%;
@@ -99,53 +145,36 @@ li div {
 
 #outline-box li {
   font-weight: bold;
-  cursor: pointer;
 }
 
-.header-div {
-  background-color: darkgray;
-  color: var(--secondary-color, #020202);
-  margin-bottom: 7%;
-  position: relative;
-  display: grid;
-  grid-gap: 2px;
-  text-align: center;
-  grid-template-columns: 20% 80%;
-  max-width: 300px;
-}
-.header-div div {
-  display: flex;
-  align-item: center;
-  justify-item: start;
-  align-items: center;
-  justify-content: center;
-}
-
-.icon-div {
-  border : 1px solid var(--soft-color, wheat);
-  border-radius: 10%;
-}
-
-.header-div div h2 {
-  margin : 0;
-  justify-self: flex-start;
-  text-decoration : underline;
+#title-button-div {
+background-color: var(--light-color, #F4F4F4);
+  width : 100%;
+  padding-inline: 5%;
+  margin-bottom : 7%;
 }
 
 #formation-body {
   padding : inherit;
+  margin: 1.5em;
 }
 
 #formation-body h4 {
-  display: inline-block;
-  color : var(--light-color, white);
-  background-color: var(--secondary-color, darkgray);
-  padding-inline: 15px;
+  display: block;
+  color : var(--dark-color, black);
+}
+
+#formation-body li {
+  margin-top : 1em;
 }
 /* Section Competences */
 
 .cp-hr {
   margin: 0;
+}
+
+.cp-button {
+  margin: 5px ;
 }
 
 #competence-body {
@@ -170,7 +199,7 @@ svg.dev-competence {
 /* Section Experiences */
 
 #experience {
-  margin-bottom: 2em;
+  margin-block: 2em;
 }
 
 #experience-body {
@@ -183,13 +212,14 @@ svg.dev-competence {
 
 #to-top-link {
   position: fixed;
-  bottom: 15%;
-  left: 80%;
+  bottom: 12%;
+  right : 10.5%;
   visibility: hidden;
+  color: var(--primary-color, #020202);
   text-align : center ;
 }
+
 #to-top-link .to-top-icon {
-  color: var(--primary-color, #020202);
   background-color: white;
   border-radius : 50%;
   font-size: 40px;
@@ -212,4 +242,10 @@ svg.dev-competence {
 .footer-icon {
   margin: 2%;
   color: white;
+}
+
+@media (max-width: 200px) and (max-height: 500px) {
+  #titre {
+    width : 100vh ;
+  }
 }
