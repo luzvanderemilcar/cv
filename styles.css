@@ -78,13 +78,12 @@ li div {
   background-color: darkgray;
   color: var(--secondary-color, #020202);
   margin-bottom: 7%;
-  padding : 10px 10px 10px 5px;
+  padding : 10px 15% 10px 10%;
   position: relative;
   display: grid;
   grid-gap: 2px;
   text-align: center;
   grid-template-columns: 20% 80%;
-  max-width: 300px;
   min-width: 160px;
 }
 
@@ -94,14 +93,18 @@ li div {
   justify-item: center;
   align-items: center;
   justify-content: center;
-  padding-right: 15%;
 }
+
 
 .icon-div {
   border: 1px solid var(--soft-color, wheat);
   max-width: 40px;
   border-radius: 10%;
   text-align: center;
+}
+
+.icon-div i {
+    
 }
 
 .header-div div h2 {
