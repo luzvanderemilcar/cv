@@ -122,6 +122,7 @@ li div {
 
 #titre-info {
     padding-bottom: inherit;
+    margin-top: 2rem;
 }
 
 #titre .section-heading {
@@ -146,6 +147,12 @@ li div {
     border-top-style: none;
     margin: 5% auto 3%;
     max-width: 300px;
+}
+
+#outline-box hr {
+    margin : 0;
+    border-top-color : var(--yellow-color);
+    height: 5px;
 }
 
 #outline-box li {
