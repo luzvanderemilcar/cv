@@ -1,5 +1,3 @@
-const topView = document.querySelector("#titre");
-
 //Competentences text marked
 let admCompetences = `#### Gestion
 _______
@@ -32,26 +30,12 @@ J'utilise D3.js pour la visualisation des données, et la manipulation des élé
 
 J'utilise des librairies comme React et Redux pour développer des applications web`;
 
+const topView = document.querySelector("#titre");
 let competences;
 let lastKnownScrollPosition = window.scrollY;
 let scrollingDown;
 
-// Data for D3 Charts
-const dataAdm = {
-    cpAbv: "adm",
-    title: "Management - Skills",
-    data: [["Problem solving", 70], ["Planning", 75], ["Communication", 80], ["Marketing", 70], ["Strategy", 60]]
-};
-const dataDev = {
-    cpAbv: "dev",
-    title: "Development - Skills",
-    data: [["HTML", 85], ["CSS", 75], ["JavaScript", 70], ["jQuery", 50], ["Bootstrap", 60], ["React", 75], ["D3", 45], ["Redux", 55]]
-};
-const dataDes = {
-    cpAbv: "des",
-    title: "Design - Skills",
-    data: [["Logo", 50], ["Flyer", 75], ["Banner", 50], ["Card", 70], [" ", 0], ["PixelLab", 75], ["Photoshop", 45], ["UI", 55]]
-};
+
 // Disable headerIds and mangle options for marked text
 marked.use({
     headerIds: false,
@@ -64,7 +48,7 @@ $(".cp-hr").css("width", getWidthValue("button.cp-button"));
 function getWidthValue(selector) {
     let value = 0;
     document.querySelectorAll(selector).forEach((item) => {
-        value += parseFloat(item.offsetWidth);
+        value += parseFloat(item.offsetWidth+ 10);
     });
     return value;
 }
@@ -125,10 +109,32 @@ document.addEventListener("scroll", () => {
     lastKnownScrollPosition = window.scrollY;
 });
 
-function scrollToElement(selector, currentId) {
-    competenceSet(currentId); // content change
-    document.querySelector(selector).scrollIntoView();
-}
+//Footer
+let copyRightElement = document.querySelector("#copyriht-info h6");
+
+let currentDateString = new Date()
+.toLocaleDateString();
+
+let year = currentDateString.slice(currentDateString.length-4, currentDateString.length);
+let yearText = document.createTextNode(" " +year);
+copyRightElement.appendChild(yearText);
+
+// Data for D3 Charts
+const dataAdm = {
+    cpAbv: "adm",
+    title: "Management - Skills",
+    data: [["Problem solving", 70], ["Planning", 75], ["Communication", 80], ["Marketing", 70], ["Strategy", 60]]
+};
+const dataDev = {
+    cpAbv: "dev",
+    title: "Development - Skills",
+    data: [["HTML", 85], ["CSS", 75], ["JavaScript", 70], ["jQuery", 50], ["Bootstrap", 60], ["React", 75], ["D3", 45], ["Redux", 55]]
+};
+const dataDes = {
+    cpAbv: "des",
+    title: "Design - Skills",
+    data: [["Logo", 50], ["Flyer", 75], ["Banner", 50], ["Card", 70], [" ", 0], ["PixelLab", 75], ["Photoshop", 45], ["UI", 55]]
+};
 
 // D3 graphic Bar chart
 
