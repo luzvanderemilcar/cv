@@ -19,9 +19,15 @@ html {
     scroll-behavior: smooth;
 }
 
+body {
+    background-color : lightgray;
+    padding: auto 5%;
+}
+
 section {
     padding-top: 2%;
 }
+
 
 li div {
     margin-bottom: 8%;
@@ -48,7 +54,10 @@ li div {
 }
 
 .container {
-    margin: 3%;
+    margin: 7% 5%;
+    padding-bottom : 2%;
+    border-radius : 5px;
+    background-color: var(--light-color, #FFFFFF);
 }
 
 .container ul.list-head-section {
@@ -206,14 +215,14 @@ li div {
     font-weight: bold;
 }
 
-svg.dev-competence {
-    margin-bottom: 15px;
+svg.competence {
+    margin-bottom: 5%;
 }
 
 /* Section Experiences */
 
 #experience {
-    margin-block: 2em;
+    margin-block: 1.5em;
 }
 
 #experience-body {

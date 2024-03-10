@@ -6,7 +6,8 @@ Je peux contribuer à des opérations et remplir des fonctions ayant rapport à 
 - La comptabilité générale. Je peux enregistrer les opérations journalieres, préparer les états financiers, entre autres l'état des flux de trésorerie
 - La finance. Je peux faire la gestion du fonds de roulement, des comptes cycliques (encaisse, clients, stocks, fournisseurs, etc) et des activités d'investissement.
 - L'analyse financière. Je peux effectuer le diagnostic financier de l'entreprise avec l'analyse financière, utiliser la comptabilité de gestion pour évaluer la production et la commercialisation des produits, etc.
-- J'utilise des logiciels d'informatique bureautique comme Word, Excel, Powerpoint, et autres comme rédiger des documents, créer des présentations et monter des programmes de traitements de données et effectuer des projections surtout en comptabilité de gestion.`;
+
+J'utilise des logiciels d'informatique bureautique comme Word, Excel, Powerpoint, et autres comme rédiger des documents, créer des présentations et monter des programmes de traitements de données et effectuer des projections surtout en comptabilité de gestion.`;
 
 let desCompetences = `#### Design graphique
 ----------
@@ -15,7 +16,7 @@ J'ai débuté dans le domaine du design graphique avec la production de design p
 - Je peux utiliser des applications et des logiciels de design pour produire des graphiques divers.
 - Je peux concevoir et produire des flyers, dessiner des logos et des cartes de multiples dimensions pour différentes occasions, entre autres.
 
-- J'utilise plusieurs programmes comme Coral Draw, Photoshop pour créer les designs qui satisfont les demandes et apportent les solutions conçues.`;
+J'utilise plusieurs programmes comme Coral Draw, Photoshop pour créer les designs qui satisfont les demandes et apportent les solutions conçues.`;
 
 let devCompetences = `#### Développement web
 ----------
@@ -110,7 +111,7 @@ document.addEventListener("scroll", () => {
 });
 
 //Footer
-let copyRightElement = document.querySelector("#copyriht-info h6");
+let copyRightElement = document.querySelector("#copyriht-info h6 span.date-year");
 
 let currentDateString = new Date()
 .toLocaleDateString();
@@ -161,7 +162,7 @@ function setChart(dataSrc) {
         .range([topPadding, h - padding]);
     const svg = d3.select("#bar-chart")
         .append("svg")
-        .attr("class", cp + "-competence")
+        .attr("class", "competence")
         .attr("width", w)
         .attr("height", h)
         .style("background-color", "white");
