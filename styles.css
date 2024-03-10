@@ -54,7 +54,7 @@ li div {
 }
 
 .container {
-    margin: 7% 5%;
+    margin: auto 7px;
     padding-bottom : 2%;
     border-radius : 5px;
     background-color: var(--light-color, #FFFFFF);
