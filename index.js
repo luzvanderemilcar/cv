@@ -138,13 +138,18 @@ const dataDes = {
 };
 
 // D3 graphic Bar chart
+let bodyColor = getComputedStyle(document.body).getPropertyValue('--main-background-color');
+let detailColor = getComputedStyle(document.body).getPropertyValue('--soft-color');
 
 let sectionWidth = parseFloat(document.querySelector("#competence").offsetWidth);
-let [h, w, padding, topPadding] = [300, 650, 20, 40];
+let [w, padding, topPadding] = [375, 20, 40];
 // Change the width according to viewport section
 if (sectionWidth < w) {
     w = sectionWidth - 2.5 * padding;
 }
+
+let h = 0.65 * w;
+
 const [mainColor, redColor, yellowColor, greenColor] = ["#020202", "#f00", "yellow", "#0f0"];
 
 // Change chart look according to dataSrc
@@ -152,6 +157,7 @@ function setChart(dataSrc) {
     let dataset = dataSrc.data;
     let title = dataSrc.title;
     let cp = dataSrc.cpAbv;
+    
     //Setting the scale
     const xScale = d3.scaleLinear()
         .domain([0, 100])
@@ -165,7 +171,7 @@ function setChart(dataSrc) {
         .attr("class", "competence")
         .attr("width", w)
         .attr("height", h)
-        .style("background-color", "white");
+        .style("background-color", bodyColor);
 
     svg.append("g")
         .attr("class", "title");

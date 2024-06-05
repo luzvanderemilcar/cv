@@ -1,7 +1,7 @@
 :root {
     /*Color Variables*/
     --primary-color: #680000;
-    --light-color: #F8F8F8;
+    --main-background-color: #EDEEE8;
     --dark-color: #020202;
     --soft-color: wheat;
 
@@ -15,19 +15,21 @@
     --light-font: "Montserrat-Light";
 }
 
-html {
+* {
     scroll-behavior: smooth;
 }
 
 body {
-    background-color : lightgray;
-    padding: auto 5%;
+    background-color : var(--main-background-color, #F8F8F8);
 }
 
 section {
-    padding-top: 2%;
+  padding-bottom: 1.5em;
 }
 
+ul {
+  padding-left : 15px;
+}
 
 li div {
     margin-bottom: 8%;
@@ -37,27 +39,27 @@ li div {
 .btn-outline-light:focus,
 .btn-dark {
     background-color: var(--primary-color, #680000) !important;
-    color: var(--light-color) !important;
+    color: var(--main-background-color) !important;
 }
 
 .btn-dark.focus,
 .btn-dark:focus,
 .btn-outline-light {
     box-shadow: unset !important;
-    background-color: var(--light-color, #F2F2F2) !important;
+    background-color: var(--main-background-color, #F2F2F2) !important;
     color: var(--primary-color, #680000) !important;
     border-color: var(--primary-color, #680000) !important;
 }
 
 .container-fluid {
     padding: 3% 7%;
+    width: 100%
 }
 
 .container {
+  width: 100%;
     margin: auto 7px;
-    padding-bottom : 2%;
     border-radius : 5px;
-    background-color: var(--light-color, #FFFFFF);
 }
 
 .container ul.list-head-section {
@@ -66,12 +68,7 @@ li div {
 
 .dark-section {
     background-color: var(--secondary-color, #020202);
-    color: var(--light-color, #f8f8f8);
-}
-
-.white-section {
-    background-color: var(--light-color, #f8f8f8);
-    color: var(--dark-color, #020202);
+    color: var(--main-background-color, #f8f8f8);
 }
 
 .big-heading {
@@ -126,7 +123,7 @@ li div {
 /* Section Titre */
 
 #titre {
-    margin-bottom: 5%;
+    padding-block: 5%;
 }
 
 #titre-info {
@@ -169,10 +166,9 @@ li div {
 }
 
 #title-button-div {
-    background-color: var(--light-color, #F4F4F4);
+    background-color: var(--main-background-color, #F4F4F4);
     width: 100%;
-    padding-inline: 5%;
-    margin-block: 7%;
+    padding: 7% 5%;
 }
 
 #formation-body {
@@ -181,7 +177,6 @@ li div {
 }
 
 #formation-body h4 {
-    display: block;
     color: var(--dark-color, black);
 }
 
@@ -209,26 +204,20 @@ li div {
 
 /* chart Bar*/
 
+#bar-chart {
+  display: inline-block;
+    padding-bottom: 5%;   
+    border: 1px solid var(--soft-color);
+    border-radius: 15%
+}
+
 .graph-title {
     font-family: "Montserrat";
     font-style: italic;
     font-weight: bold;
 }
 
-svg.competence {
-    margin-bottom: 5%;
-}
-
 /* Section Experiences */
-
-#experience {
-    margin-block: 1.5em;
-}
-
-#experience-body {
-    padding: inherit;
-}
-
 .workplace .header p {
     text-shadow: 0 0 black;
 }
@@ -252,10 +241,9 @@ svg.competence {
 #footer {
     text-align: center;
     background-color: var(--secondary-color, #020202);
-    color: var(--light-color, white);
+    color: var(--main-background-color, white);
     position: absolute;
     left: 0;
-    width: 100vw;
 }
 
 #footer div {
@@ -267,8 +255,12 @@ svg.competence {
     color: white;
 }
 
-@media (max-width: 200px) and (max-height: 500px) {
-    #titre {
-        width: 100vh;
-    }
+@media (min-width: 500px) {
+  section {
+    padding-inline : 5% !important;
+  }
+  
+  #bar-chart {
+    float: right;
+  }
 }
