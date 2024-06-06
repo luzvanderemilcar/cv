@@ -38,17 +38,17 @@ li div {
 .btn-outline-light.focus,
 .btn-outline-light:focus,
 .btn-dark {
-    background-color: var(--primary-color, #680000) !important;
-    color: var(--main-background-color) !important;
+    background-color: var(--primary-color, #680000);
+    color: var(--main-background-color);
 }
 
 .btn-dark.focus,
 .btn-dark:focus,
 .btn-outline-light {
-    box-shadow: unset !important;
-    background-color: var(--main-background-color, #F2F2F2) !important;
-    color: var(--primary-color, #680000) !important;
-    border-color: var(--primary-color, #680000) !important;
+    box-shadow: unset;
+    background-color: var(--main-background-color, #F2F2F2);
+    color: var(--primary-color, #680000);
+    border-color: var(--primary-color, #680000);
 }
 
 .container-fluid {
@@ -72,7 +72,7 @@ li div {
 }
 
 .big-heading {
-    font-size: 3rem;
+    font-size: 2rem;
     line-height: 1.5;
     margin-bottom: 5%;
 }
@@ -83,6 +83,7 @@ li div {
     line-height: 1.5;
     padding: auto 5%;
 }
+
 
 .header-div {
     background-color: darkgray;
@@ -123,7 +124,11 @@ li div {
 /* Section Titre */
 
 #titre {
+  height: 100vh;
+  max-height: 650px;
+  min-height: 400px;
     padding-block: 5%;
+    background-image: url("/images/titre_background_image.jpg");
 }
 
 #titre-info {
@@ -131,22 +136,18 @@ li div {
     margin-top: 2rem;
 }
 
-#titre .section-heading {
-    padding: 2% 0;
-}
 
 #titre-info .image-div {
     margin-left: 3%;
-    width: 100px;
-    height: 100px;
-    background-image: url("Luzvander.jpg");
-    background-size: 100px;
+    width: 170px;
+    height: 170px;
+    background-image: url("/images/Luzvander.jpg");
+    background-size: 170px;
     border: 1px solid var(--yellow-color, #ffc107);
     border-radius: 50%;
 }
 
 #outline-box {
-    margin: 5%;
     border: 1px solid;
     border-color: var(--yellow-color);
     border-radius: 5px;
@@ -198,7 +199,7 @@ li div {
     padding: inherit;
 }
 
-#competence-body div {
+#competence-body div:not(#bar-chart) {
     margin: 5% auto;
 }
 
@@ -206,6 +207,7 @@ li div {
 
 #bar-chart {
   display: inline-block;
+  margin-top: 5%;
     padding-bottom: 5%;   
     border: 1px solid var(--soft-color);
     border-radius: 15%
@@ -255,12 +257,14 @@ li div {
     color: white;
 }
 
-@media (min-width: 500px) {
+@media (min-width: 768px) {
   section {
-    padding-inline : 5% !important;
+    padding-inline : 5%;
   }
   
   #bar-chart {
     float: right;
+    margin-left: 15px;
+    margin-top: 10%
   }
 }

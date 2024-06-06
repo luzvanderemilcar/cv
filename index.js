@@ -129,12 +129,12 @@ const dataAdm = {
 const dataDev = {
     cpAbv: "dev",
     title: "Development - Skills",
-    data: [["HTML", 85], ["CSS", 75], ["JavaScript", 70], ["jQuery", 50], ["Bootstrap", 60], ["React", 75], ["D3", 45], ["Redux", 55]]
+    data: [["HTML", 85], ["CSS", 75], ["JavaScript", 70], ["jQuery", 50], ["Bootstrap", 60], ["React", 75], ["Redux", 55]]
 };
 const dataDes = {
     cpAbv: "des",
     title: "Design - Skills",
-    data: [["Logo", 50], ["Flyer", 75], ["Banner", 50], ["Card", 70], [" ", 0], ["PixelLab", 75], ["Photoshop", 45], ["UI", 55]]
+    data: [["Logo", 50], ["Flyer", 75], ["Banner", 50], ["Card", 70], ["TOOLS", 0], ["PixelLab", 75], ["Photoshop", 45]]
 };
 
 // D3 graphic Bar chart
@@ -142,15 +142,16 @@ let bodyColor = getComputedStyle(document.body).getPropertyValue('--main-backgro
 let detailColor = getComputedStyle(document.body).getPropertyValue('--soft-color');
 
 let sectionWidth = parseFloat(document.querySelector("#competence").offsetWidth);
-let [w, padding, topPadding] = [375, 20, 40];
+let [w, padding, topPadding] = [300, 20, 40];
+
 // Change the width according to viewport section
 if (sectionWidth < w) {
     w = sectionWidth - 2.5 * padding;
 }
 
-let h = 0.65 * w;
+let h = 0.75 * w;
 
-const [mainColor, redColor, yellowColor, greenColor] = ["#020202", "#f00", "yellow", "#0f0"];
+const [whiteColor, mainColor, redColor, yellowColor, greenColor] = ["white", "#020202", "#f00", "yellow", "#0f0"];
 
 // Change chart look according to dataSrc
 function setChart(dataSrc) {
@@ -225,7 +226,7 @@ function setChart(dataSrc) {
         .text(d => d[0])
         .attr("x", padding + 2)
         .attr("y", (d, i) => yScale(i) + 8.5)
-        .attr("fill", "white")
+        .attr("fill", d => d[0] == "TOOLS" ? mainColor : whiteColor)
         .style("font-size", 10);
 
     // Setting percentage 
