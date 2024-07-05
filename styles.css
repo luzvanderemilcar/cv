@@ -1,7 +1,7 @@
 :root {
   /*Color Variables*/
   --primary-color: #680000;
-  --main-background-color: #E1F6F8;
+  --main-background-color: #FFFDE9;
   --dark-color: #020202;
   --soft-color: wheat;
 
@@ -23,9 +23,14 @@ body {
   background-color: var(--main-background-color, #F8F8F8);
 }
 
+aside.full-width {
+  visibility: hidden
+}
+
 section {
   padding-bottom: 1.5em;
 }
+
 
 ul {
   padding-left: 15px;
@@ -41,7 +46,7 @@ li div {
 }
 
 .container {
-  width: 100%;
+  /*width: 100%;*/
   margin: auto 7px;
   border-radius: 5px;
 }
@@ -67,7 +72,9 @@ li div {
   line-height: 1.5;
   padding: auto 5%;
 }
-
+.section-body {
+  padding-inline: 1.5em;
+}
 
 .header-div {
   background-color: darkgray;
@@ -251,9 +258,31 @@ button.cp-button.clicked {
 }
 
 @media (min-width: 768px) {
+  div.page-layout {
+    display : grid;
+    grid-template-columns : 75% 25%;
+grid-template-areas: 'main aside';
+  }
+  
+  div.page-layout main {
+    grid-area: main
+  }
+  
+  
   section {
     padding-inline: 5%;
   }
+  
+aside.full-width {
+  grid-area : aside;
+  visibility: visible;
+  padding: auto 1rem;
+  background-color: var(--soft-color, gray);
+}
+
+aside.full-width * {
+  margin : 2rem 1.5rem;
+}
 
   #bar-chart {
     float: right;

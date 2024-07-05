@@ -113,13 +113,11 @@ document.addEventListener("scroll", () => {
 });
 
 //Footer
-let copyRightElement = document.querySelector("#copyriht-info h6 span.date-year");
+let copyRightElement = document.querySelector("#copyriht-info h6.date-year");
+let copyrightOwner = "luzvanderemilcar"
+let year = new Date().getUTCFullYear();
 
-let currentDateString = new Date()
-  .toLocaleDateString();
-
-let year = currentDateString.slice(currentDateString.length - 4, currentDateString.length);
-let yearText = document.createTextNode(" " + year);
+let yearText = document.createTextNode(`@${copyrightOwner}  ${year}`);
 copyRightElement.appendChild(yearText);
 
 // Data for D3 Charts
