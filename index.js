@@ -117,7 +117,7 @@ let copyRightElement = document.querySelector("#copyriht-info h6.date-year");
 let copyrightOwner = "luzvanderemilcar"
 let year = new Date().getUTCFullYear();
 
-let yearText = document.createTextNode(`@${copyrightOwner}  ${year}`);
+let yearText = document.createTextNode(`@${copyrightOwner} ${year}`);
 copyRightElement.appendChild(yearText);
 
 // Data for D3 Charts
@@ -134,7 +134,7 @@ const dataGestion = {
     {
       heading: "Planification",
       introductoryPhrase: "Je peux contribuer à :",
-      items: ["L'élaboration des budgets de ventes, de production, de approvisionnement entre autres", "L'évaluation des risques en matières d'investissement"]
+      items: ["L'élaboration des budgets de ventes, de production, d'approvisionnement entre autres", "L'évaluation des risques en matières d'investissement"]
   },
     {
       heading: "Finance",
