@@ -1,10 +1,10 @@
 :root {
   /*Color Variables*/
   --primary-color: #680000;
-  --main-background-color: #FFFDE9;
+  --main-background-color: #F0F0F0;
   --dark-color: #020202;
   --soft-color: #F0F0F0;
-
+  --white-color: #F5F5F5;
   --secondary-color: #444444;
   --yellow-color: #ffc107;
 
@@ -15,7 +15,7 @@
   --light-font: "Montserrat-Light";
 }
 
-* {
+html {
   scroll-behavior: smooth;
 }
 
@@ -29,21 +29,31 @@ aside.full-width {
 }
 
 section {
-  padding-bottom: 1.5em;
+  padding: 1.5em 2.5%;
 }
 
+section>div.section-description>p {
+  margin-left: 0.5rem;
+  font-weight: 300;
+}
 
 ul {
   padding-left: 1rem;
 }
 
-li div {
-  margin-bottom: 8%;
+.item-subsection {
+  background-color: var(--white-color, white);
+  margin-block: 1rem;
+  padding: 1.5rem;
+  border-radius: 15px;
+}
+
+.item-subsection > h5 {
+  margin-bottom: 5%
 }
 
 .container-fluid {
   padding: 3% 7%;
-  width: 100%
 }
 
 .container {
@@ -62,43 +72,33 @@ li div {
 }
 
 .big-heading {
-  font-size: 2rem;
-  line-height: 1.5;
-  margin-bottom: 5%;
+  font-size: 1.5rem;
+font-family: var(--specific-font, "Times New Roman");
+line-height: 1.5;
 }
 
 .section-heading {
-  font-size: 1.5rem;
+  font-size: 1.25rem;
   font-family: var(--specific-font, "Times New Roman");
   line-height: 1.5;
   padding: auto 5%;
 }
-.section-body {
-  padding-inline: 1.5em;
-}
 
 .header-div {
+  display: flex;
   background-color: darkgray;
   color: var(--secondary-color, #020202);
   margin-bottom: 7%;
-  padding: 10px 15% 10px 10%;
+ padding: 10px;
   border-radius: 5px;
   position: relative;
-  display: grid;
-  grid-gap: 2px;
-  text-align: center;
-  grid-template-columns: 20% 80%;
-  min-width: 160px;
 }
 
 .header-div div {
   display: flex;
-  align-item: center;
-  justify-item: center;
   align-items: center;
   justify-content: center;
 }
-
 
 .icon-div {
   border: 1px solid var(--soft-color, wheat);
@@ -107,7 +107,14 @@ li div {
   text-align: center;
 }
 
-.header-div div h2 {
+.header-div :last-child {
+  flex: .8;
+  justify-self: flex-start;
+  margin: 0;
+  line-height: unset
+}
+
+.header-div div .header-text {
   margin: 0;
   justify-self: flex-start;
   text-transform: uppercase;
@@ -116,36 +123,34 @@ li div {
 /* Section Titre */
 
 #titre {
-  height: 100vh;
-  max-height: 650px;
-  min-height: 500px;
   padding-block: 5%;
+  font-size: 14px;
   background-color: var(--secondary-color)
 }
 
 #titre-info {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 45vw;
+  min-width: 300px;
   padding-bottom: inherit;
-  margin-top: 2rem;
+  margin-top: 1.5rem;
 }
 
 
-#titre-info .image-div {
-  margin-left: 3%;
-  width: 170px;
-  height: 170px;
-  background-image: url("./Luzvander.jpg");
-  background-size: 170px;
+#titre-info .separator-div {
+  width: 150px;
+  height: auto;
   border: 1px solid var(--yellow-color, #ffc107);
   border-radius: 50%;
 }
 
 #outline-box {
-  border: 1px solid;
-  border-color: var(--yellow-color);
+  border: 1px solid var(--yellow-color);
   border-radius: 5px;
   border-top-style: none;
-  margin: 5% auto 3%;
-  max-width: 300px;
+  margin: 15% 5% auto;
 }
 
 #outline-box hr {
@@ -154,8 +159,13 @@ li div {
   height: 5px;
 }
 
-#outline-box li {
+#outline-box h2 {
+  margin-inline: 10px;
+}
+
+#outline-box ul {
   font-weight: bold;
+  margin-left: inherit;
 }
 
 #title-button-div {
@@ -226,21 +236,20 @@ button.cp-button.clicked {
   text-shadow: 0 0 black;
 }
 
-#to-top-link {
+button.to-top {
   position: fixed;
+  display: none;
+  justify-content: center;
+  align-items: center;
   bottom: 12%;
   right: 10.5%;
-  visibility: hidden;
-  color: var(--primary-color, #020202);
-  text-align: center;
-  z-index: 2;
-}
-
-#to-top-link .to-top-icon {
-  background-color: white;
   border-radius: 50%;
-  font-size: 40px;
-  display: block;
+  width: 3rem;
+  height: 3rem;
+  background-color: var(--secondary-color, #020202);
+  color: var(--white-color, white);
+  font-size: 2rem;
+  z-index: 2;
 }
 
 #footer {
@@ -261,32 +270,11 @@ button.cp-button.clicked {
 }
 
 @media (min-width: 768px) {
-  div.page-layout {
-    display : grid;
-    grid-template-columns : 75% 25%;
-grid-template-areas: 'main aside';
-  }
   
-  div.page-layout main {
-    grid-area: main
-  }
-  
-  
-  section {
-    padding-inline: 5%;
-  }
-  
-aside.full-width {
-  grid-area : aside;
-  visibility: visible;
-  height: unset;
-  padding: auto 1rem;
-  background-color: var(--soft-color, gray);
-  margin-right: 5px;
-}
-
-aside.full-width > * {
-  margin: 1rem 0.75rem;
+#titre {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
 }
 
   #bar-chart {
@@ -299,5 +287,5 @@ aside.full-width > * {
 @media print {
   body {
     background-color: var(--main-background-color, #F8F8F8);
-  };
+  }
 }
