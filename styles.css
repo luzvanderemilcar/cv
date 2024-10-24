@@ -20,7 +20,8 @@ html {
 }
 
 body {
-  background-color: var(--main-background-color, #F8F8F8)
+  background-color: var(--main-background-color, #F8F8F8);
+  margin: 0
 }
 
 aside.full-width {
@@ -30,6 +31,7 @@ aside.full-width {
 
 section {
   padding: 1.5em 2.5%;
+  margin-inline: 1rem ;
 }
 
 section>div.section-description>p {
@@ -41,14 +43,18 @@ ul {
   padding-left: 1rem;
 }
 
-.item-subsection {
+li {
+  margin-block: 0.5rem;
+}
+
+.subsection {
   background-color: var(--white-color, white);
   margin-block: 1rem;
   padding: 1.5rem;
   border-radius: 15px;
 }
 
-.item-subsection > h5 {
+.subsection > h5 {
   margin-bottom: 5%
 }
 
@@ -69,6 +75,11 @@ ul {
 .dark-section {
   background-color: var(--secondary-color, #020202);
   color: var(--main-background-color, #f8f8f8);
+}
+
+.light-section {
+  color: var(--secondary-color, #020202);
+  background-color: var(--main-background-color, #f8f8f8);
 }
 
 .big-heading {
@@ -123,13 +134,21 @@ line-height: 1.5;
 /* Section Titre */
 
 #titre {
-  padding-block: 5%;
+  display: flex;
+flex-direction: column;
+align-items: flex-end;
   font-size: 14px;
   background-color: var(--secondary-color)
 }
 
+#titre nav.navbar {
+  justify-self: flex-start;
+  align-self: flex-end;
+}
+
 #titre-info {
   display: flex;
+  align-self: center;
   flex-direction: column;
   align-items: center;
   width: 45vw;
@@ -155,7 +174,8 @@ line-height: 1.5;
 
 #outline-box hr {
   margin: 0;
-  border-top-color: var(--yellow-color);
+  border: none;
+  border-top: 1px solid var(--yellow-color);
   height: 5px;
 }
 
@@ -174,18 +194,19 @@ line-height: 1.5;
   padding: 7% 5%;
 }
 
-#formation-body {
-  padding: inherit;
-  margin: 1.5em;
+/* Education section */
+#education {
+  margin: 0;
 }
 
-#formation-body h4 {
-  color: var(--dark-color, black);
+.subsection.education {
+  color: var(--secondary-color, #020202);
+  margin-block: 1rem;
+  padding: 1.5rem;
+  border-radius : 0;
 }
 
-#formation-body li {
-  margin-top: 1em;
-}
+
 
 /* Section Competences */
 
@@ -216,7 +237,7 @@ button.cp-button.clicked {
 
 /* chart Bar*/
 
-#bar-chart {
+.bar-chart {
   display: inline-block;
   margin-top: 10%;
   padding-bottom: 5%;
@@ -249,35 +270,51 @@ button.to-top {
   background-color: var(--secondary-color, #020202);
   color: var(--white-color, white);
   font-size: 2rem;
-  z-index: 2;
+  z-index: 1;
 }
 
-#footer {
+footer {
   text-align: center;
   background-color: var(--secondary-color, #020202);
   color: var(--main-background-color, white);
   position: absolute;
   left: 0;
+  right: 0;
+  padding-block: 3%;
 }
 
-#footer div {
-  margin-bottom: 3%;
+footer > div {
+  margin-block: .75rem;
 }
 
 .footer-icon {
-  margin: 2%;
   color: white;
 }
 
-@media (min-width: 768px) {
-  
-#titre {
-  display: flex;
-  flex-direction: row;
-  justify-content: flex-end;
+.footer-link {
+  text-decoration: none;
+  margin: 5%;
 }
 
-  #bar-chart {
+footer hr {
+  margin: 0;
+  border: none;
+  border-top: 1px solid var(--white-color, white);
+}
+
+h6.copyright-period {
+  margin : 5px;
+}
+
+
+@media (min-width: 768px) {
+ 
+
+#titre-info {
+  align-self: flex-end;
+}
+
+  .bar-chart {
     float: right;
     margin-left: 15px;
     margin-top: 15%
@@ -288,4 +325,26 @@ button.to-top {
   body {
     background-color: var(--main-background-color, #F8F8F8);
   }
+}
+/* Contact Page */
+
+div.contact {
+  background-color: var(--white-color, white);
+  margin: 25% auto 1.5rem;
+  padding: 1.5rem;
+  border-radius: 15px;
+}
+
+div.contact > h5 {
+  margin-bottom: 5%
+}
+
+div.contact a {
+  display: block;
+  margin-top: 10px;
+  text-decoration: none;
+  color: var(--dark-color, black);
+}
+div.contact a span {
+  margin-inline: 10px;
 }
