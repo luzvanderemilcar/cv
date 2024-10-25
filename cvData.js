@@ -15,6 +15,7 @@ const dataModel = {
         abbreviation: "Dev"
     }]
   },
+
   contact: {
     telephone: "+50933321829",
     email: "luzvanderemilcar@gmail.com",
@@ -28,6 +29,7 @@ const dataModel = {
         sectionHeading: "En bref",
         title: "resume",
         icon: "📝",
+        photo: "/Luzvander.jpg",
         lists: [
           {
             introductoryPhrase: "Je peux :",
@@ -165,6 +167,9 @@ const dataModel = {
     }
   }
 };
+
+console.log("24.Je suis la.34.izidodo".replace(/\d+[.]/g, /\1 \2/));
+
 export default dataModel;
 
 let {header, contact, mainContent, footer} = dataModel;

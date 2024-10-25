@@ -44,17 +44,19 @@ class Controller {
   }
 }
 
-function createTemplate(data) {
+function createTemplate(sampleData) {
   let templateFragment = document.createDocumentFragment();
 
-  createHeader(data.header, templateFragment);
-  createTemplateBody(data.mainContent, templateFragment);
-  createFooter(data.footer, templateFragment);
+  createHeader(sampleData, templateFragment);
+  createTemplateBody(sampleData, templateFragment);
+  createFooter(sampleData, templateFragment);
   return templateFragment;
 }
 
-function createHeader(headerData, wrapper) {
-  let { name, list, titles } = headerData;
+function createHeader(sampleData, wrapper) {
+  
+  
+  let { name, list, titles } = sampleData.header;
 
   let header = document.createElement("header");
   header.setAttribute("class", "container-fluid dark-section");
@@ -102,14 +104,14 @@ function createHeader(headerData, wrapper) {
   wrapper.appendChild(header)
 }
 
-function createTemplateBody(mainContent, wrapper) {
-  let { sections } = mainContent;
+function createTemplateBody(sampleData, wrapper) {
+  let { sections } = sampleData?.mainContent;
 
   let mainElement = document.createElement("main");
 
   sections?.forEach(section => {
     if (!section.disabled) {
-      if (/education/ig.test(section.title)) {
+      if (/education/gi.test(section.title)) {
         createEducationSection(section, mainElement);
       } else {
         createSection(section, mainElement);
@@ -125,6 +127,14 @@ function createTemplateBody(mainContent, wrapper) {
   goTopElement.innerHTML = getIcon(icons, "uparrow");
 
   wrapper.appendChild(goTopElement);
+}
+
+function createResumePhoto(sectionData, wrapper) {
+  let mainPhoto = document.createElement("img");
+  mainPhoto.setAttribute("class", "main-photo");
+  mainPhoto.setAttribute("src", sectionData.photo);
+  mainPhoto.setAttribute("alt", `photo of ${ sectionData.title}`);
+  wrapper.appendChild(mainPhoto);
 }
 
 function createEducationSection(sectionData, wrapper) {
@@ -184,7 +194,7 @@ return value === true || value === false
 }
 
 function createSection(sectionData, wrapper) {
-  let { title, cpAbv : cp, lists, hasChart, data } = sectionData;
+  let { title, cpAbv : cp, photo, lists, hasChart, data } = sectionData;
 
   let sectionElement = document.createElement("section");
   sectionElement.setAttribute("class", "container");
@@ -201,6 +211,10 @@ function createSection(sectionData, wrapper) {
 
 //setChart(sectionData);
 }
+        
+    if (/resume|summary/gi.test(title) && photo) {
+          createResumePhoto(sectionData, sectionElement);
+        }
 
   //Format lists info
 
@@ -312,8 +326,8 @@ function unifyElementArr(item) {
 
 //Footer
 
-function createFooter(footerData, container) {
-  let { links, copyright } = footerData;
+function createFooter(sampleData, container) {
+  let { links, copyright } = sampleData?.footer;
   
   let footerElement = document.createElement("footer");
 
