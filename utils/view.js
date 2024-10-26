@@ -1,5 +1,6 @@
 import getIcon from '/utils/getIcon.js';
 import icons from '/assets/icons.js';
+import {titlecase, uppercase, lowercase , capitalcase} from '/utils/case.js';
 
 let sectionHeadingTag = "h4";
 let listHeadingTag = "h5";
@@ -165,11 +166,8 @@ function createEducationList(list, wrapper) {
   sectionListContainer.setAttribute("class", "subsection education")
 
   //Format list heading
-  if (heading) {
     let headingElement = document.createElement(listHeadingTag);
-    headingElement.innerHTML = heading;
 let schoolElement = document.createElement("p");
-schoolElement.innerHTML = `<em>${schoolName}</em>`;
 
     let hrElement = document.createElement("hr");
     hrElement.classList.add("heading-base");
@@ -177,16 +175,27 @@ schoolElement.innerHTML = `<em>${schoolName}</em>`;
     sectionListContainer.appendChild(headingElement);
     sectionListContainer.appendChild(schoolElement);
     sectionListContainer.appendChild(hrElement);
-  }
 
   for (let key in list) {
-    if (!/\w*school\w*|heading/i.test(key) && !isBoolean(list[key])) {
+    if (isHeadingKey(key))
+    headingElement.innerHTML = list[key]
+    if (isSchoolKey(key)) schoolElement.innerHTML = `<em>${titlecase(list[key])}</em>`;
+    
+    if (!isHeadingKey(key) && !isSchoolKey(key) && !isBoolean(list[key])) {
     let keyParagraph = document.createElement("p");
-keyParagraph.innerHTML = `<strong>${key.toLowerCase()}</strong> : ${list[key]}`;
+keyParagraph.innerHTML = `<strong>${capitalcase(key)}</strong> : ${list[key]}`;
 sectionListContainer.appendChild(keyParagraph);
 }
 }
   wrapper.appendChild(sectionListContainer);
+}
+
+function isHeadingKey(keyName) {
+  return /heading/gi.test(keyName)
+}
+
+function isSchoolKey(keyName) {
+  return /school|[eé]cole/gi.test(keyName)
 }
 
 function isBoolean(value) {
@@ -209,7 +218,7 @@ function createSection(sectionData, wrapper) {
   svgGraphContainer.setAttribute("class", `${cp} bar-chart`);
  sectionElement.appendChild(svgGraphContainer);
 
-//setChart(sectionData);
+setChart(sectionData);
 }
         
     if (/resume|summary/gi.test(title) && photo) {

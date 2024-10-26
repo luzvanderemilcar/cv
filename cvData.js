@@ -47,23 +47,22 @@ const dataModel = {
           {
             heading: "Administration économique et sociale (AES)",
             schoolName: "Ecole de Droit et des Sciences Economiques des Gonaives",
-            diploma: "Gestion des entreprises",
-            startTime: "2015",
-            endTime: "2019"
+            // Variables keys
+            "Spécialisation" : "Gestion des entreprises",
+            "Début": "2015",
+            "Fin": "2019"
   },
           {
             heading: "Développement web",
-            schoolName: "FreeCodeCamp",
-            diploma: "Frond End Development Libraries",
-            startTime: "2022",
-            endTime: "-"
+            ecole: "FreeCodeCamp",
+            "Certification" : "Frond End Development Libraries",
+            'Début': "2022"
 },
           {
-            heading: "English",
+            heading: "English Study",
             schoolName: "World English Institute",
-            diploma: "Beginning to Advanced Course",
-            startTime: "2024",
-            endTime: "-"
+            'Courses' : "Elementary to Advanced Course",
+            "Début": "2024",
 }
         ],
         disabled: false,
@@ -92,7 +91,7 @@ const dataModel = {
 
   }],
         data: [["Résolution de problème", 70], ["Planification", 75], ["Communication", 80], ["Marketing", 70]],
-        hasChart: false 
+        hasChart: false
 },
       {
         sectionHeading: "Développement",
@@ -167,8 +166,6 @@ const dataModel = {
     }
   }
 };
-
-console.log("24.Je suis la.34.izidodo".replace(/\d+[.]/g, /\1 \2/));
 
 export default dataModel;
 
