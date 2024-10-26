@@ -1,3 +1,5 @@
+import icons from '/assets/icons.js';
+
 const dataModel = {
   header: {
     name: "Luzvander EMILCAR",
@@ -28,7 +30,6 @@ const dataModel = {
       {
         sectionHeading: "En bref",
         title: "resume",
-        icon: "📝",
         photo: "/Luzvander.jpg",
         lists: [
           {
@@ -43,6 +44,7 @@ const dataModel = {
         sectionHeading: "Education",
         description: "",
         title: "Education",
+        icon: icons?.graduation,
         lists: [
           {
             heading: "Administration économique et sociale (AES)",
@@ -72,6 +74,7 @@ const dataModel = {
         sectionHeading: "Gestion",
         cpAbv: "ges",
         title: "Gestion",
+        icon: icons?.listcheck,
         description: "Je peux contribuer à des opérations et remplir des fonctions ayant rapport à :",
         lists: [
           {
@@ -97,6 +100,7 @@ const dataModel = {
         sectionHeading: "Développement",
         cpAbv: "dev",
         title: "Développement",
+        icon: icons?.listcheck,
         description: "",
         lists: [{
             heading: "HTML, CSS et JavaScript",
@@ -120,6 +124,7 @@ const dataModel = {
         sectionHeading: "Design",
         cpAbv: "des",
         title: "Design",
+        icon: icons?.listcheck,
         description: "J'ai débuté dans le domaine du design graphique avec la production de design pour une entreprise de beauté. Mon approche du design est fonctionnelle, c'est-à-dire à la communication entre le commanditaire et les destinataires de son message.",
         lists: [{
             heading: "Conception graphique",

@@ -258,7 +258,7 @@ function createSectionHeader(sectionData, sectionElement) {
   let headingElement = document.createElement(sectionHeadingTag);
 
   headingElement.innerHTML = sectionHeading;
-  headingElement.classList.add("header-text");
+  headingContainer.classList.add("header-text");
 
   headingContainer.appendChild(headingElement);
 
