@@ -24,6 +24,12 @@ body {
   margin: 0
 }
 
+main {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
 aside.full-width {
   visibility: hidden;
   height: 0;
@@ -129,7 +135,7 @@ padding: 5px;
 }
 
 .header-div h4 {
-  margin: 0 0 0 2rem
+  margin: 0 0 0 1.5rem
 }
 
 /* Section Titre */
@@ -202,6 +208,12 @@ padding: 5px;
   border-radius: 50%;
 }
 
+#resume div.subsection {
+  border-left: 2.5px solid var(--primary-color, darkgray);
+border-top-left-radius: 0;
+border-bottom-left-radius: 0;
+}
+
 /* Education section */
 #education {
   margin: 0;
@@ -271,13 +283,13 @@ button.to-top {
   display: none;
   justify-content: center;
   align-items: center;
-  bottom: 12%;
-  right: 10.5%;
+  bottom: 7.5%;
+  right: 10%;
   border-radius: 50%;
-  width: 3rem;
-  height: 3rem;
-  background-color: var(--secondary-color, #020202);
-  color: var(--white-color, white);
+  border: none;
+  width: 2.5rem;
+  height: 2.5rem;
+  color: var(--primary-color, blue);
   font-size: 2rem;
   z-index: 1;
 }
@@ -311,8 +323,10 @@ footer hr {
   border-top: 1px solid var(--white-color, white);
 }
 
-h6.copyright-period {
-  margin: 5px;
+div#copyright-info .date-year {
+  margin-top: 25px;
+  margin-bottom: 0;
+  font-size: 0.5rem
 }
 
 
@@ -346,10 +360,36 @@ h6.copyright-period {
 }
 
 /* Contact Page */
+.contact-me {
+  width: 75%;
+    margin: 1.5rem 1.5rem 2.5rem;
+}
+
+.contact-me form {
+  position: relative;
+  width: 100%;
+}
+
+.contact-me form .input-field {
+  display: block;
+  margin-block: 5px;
+  width: calc(100% - 6px);
+  border-width: 1px;
+}
+
+.contact-me form input {
+  height: 30px;
+}
+
+.contact-me form button {
+  position: absolute;
+  right: 0;
+}
 
 div.contact {
   background-color: var(--white-color, white);
-  margin: 25% auto 1.5rem;
+  width: 80%;
+  margin: 1.5rem auto;
   padding: 1.5rem;
   border-radius: 15px;
 }

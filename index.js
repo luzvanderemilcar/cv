@@ -1,9 +1,8 @@
-import { Model, View, Controller } from '/utils/view.js';
+import { createTemplate, addChartToDoucument} from '/utils/view.js';
 import dataModel from "/cvData.js";
 
-const app = new Controller(new Model(dataModel), new View());
 
-app.init();
+createTemplate(dataModel, document.body);
 
 const topView = document.querySelector("#titre");
 /*
@@ -66,6 +65,9 @@ let scrollingDown;
 
 document.addEventListener("DOMContentLoaded", function() {
   const toTopElement = document.querySelector(".to-top");
+  
+  //Add SVG graphic to document
+  addChartToDoucument(dataModel);
 
   document.addEventListener("scroll", () => {
 

@@ -11,15 +11,16 @@ const icons = {
   instagram: '<i class="fa-brands fa-instagram fa-lg "></i>',
   linkedin: '<i class="fa-brands fa-linkedin-in fa-lg"></i>',
   twitter: '<i class="fa-brands fa-twitter fa-lg"></i>',
+  "x-twitter": '<i class="fa-brands fa-x-twitter fa-lg"></i>',
   youtube: '<i class="fa-brands fa-youtube fa-lg"></i>',
 
   //Controls
-  menu: '=',
-  //'<i class="fa fa-arrow-circle-up"></i>',
-  uparrow: '<i class="fa fa-arrow-circle-up"></i>',
+  bars: '<i class="fa-solid fa-bars"></i>',
+  "elipsis-vertical" : '<i class="fa-solid fa-ellipsis-vertical"></i>',
+  uparrow: '<i class="fa-solid fa-arrow-up"></i>',
   downarrow: '⬇️',
   leftarrow: '⬅️',
-  rightarrow: '➡️' ,
+  arrowright: '<i class="fa-solid fa-arrow-right"></i>' ,
   
   //Section Heading 
   graduation: '<i class="fa fa-graduation-cap fa-lg"></i>',

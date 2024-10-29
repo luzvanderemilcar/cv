@@ -9,25 +9,38 @@
   <title>Contact - Luzvander EMILCAR</title>
 
   <!-- Stylesheets -->
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous"/>
-  <link rel="stylesheet" href="styles.css"/>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous" />
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
 
 <body>
-<header>
-  
-</header>
-<main>
-  <div class="contact">
-    <h2>Contact informations</h2>
-    <hr>
-  </div>
-</main>
-<footer>
-  
-</footer>
-<script src="/contact.js" type="module"></script>
+  <header>
+  </header>
+  <main>
+    <div class="header-div">
+      <h2>Contact</h2>
+    </div>
+    <hr />
+    <div class="contact-me">
+      <h4>Message us</h4>
+      <form id="contact-me-form">
+        <input class="input-field" type="text" name="senderName" placeholder="Your name" required>
+        <input class="input-field" type="email" name="senderEmail" placeholder="Your email" required>
+        <textarea class="input-field" name="senderMessage" cols="24" rows="10" name="senderMessage" placeholder="Message"></textarea>
+        <button type="submit">Send</button>
+      </form>
+    </div>
+    <hr/>
+    <div class="contact">
+      <h4>Contact informations</h4>
+      <hr>
+    </div>
+  </main>
+  <footer>
+  </footer>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/js/all.min.js" integrity="sha512-6sSYJqDreZRZGkJ3b+YfdhB3MzmuP9R7X1QZ6g5aIXhRvR1Y/N/P47jmnkENm7YL3oqsmI6AK+V6AD99uWDnIw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <script src="/contact.js" type="module"></script>
 </body>
 
 </html>

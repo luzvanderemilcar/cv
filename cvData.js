@@ -3,6 +3,7 @@ import icons from '/assets/icons.js';
 const dataModel = {
   header: {
     name: "Luzvander EMILCAR",
+    photo: "/Luzvander.jpg",
     titles: [
       {
         name: "Gestionnaire",
@@ -30,7 +31,6 @@ const dataModel = {
       {
         sectionHeading: "En bref",
         title: "resume",
-        photo: "/Luzvander.jpg",
         lists: [
           {
             introductoryPhrase: "Je peux :",
@@ -94,7 +94,7 @@ const dataModel = {
 
   }],
         data: [["Résolution de problème", 70], ["Planification", 75], ["Communication", 80], ["Marketing", 70]],
-        hasChart: false
+        hasChart: true
 },
       {
         sectionHeading: "Développement",
@@ -117,8 +117,8 @@ const dataModel = {
             introductoryPhrase: "Pour la création d'applications web d'une seule page, j'utilise : ",
             items: ["React.js pour la conception et l'organisation des données,  la création des composants, entre autre.", "Redux pour le management de l'état de l'application."]
   }],
-        data: [["HTML", 85], ["CSS", 75], ["JavaScript", 70], ["jQuery", 50], ["Bootstrap", 60], ["React", 75], ["Redux", 55]],
-        hasChart: false
+        data: [["HTML", 85], ["CSS", 75], ["JavaScript", 80], ["jQuery", 50], ["Bootstrap", 60], ["React", 75], ["Redux", 55]],
+        hasChart: true
 },
       {
         sectionHeading: "Design",
@@ -138,7 +138,7 @@ const dataModel = {
   }],
         data: [["Logo", 50], ["Flyer", 75], ["Card", 70], ["TOOLS", 0], ["PixelLab", 75], ["Photoshop", 45]],
         disabled: false,
-        hasChart: false
+        hasChart: true
 }
 ]
   },
@@ -153,8 +153,8 @@ const dataModel = {
   href: "https://www.instagram.com/@luzvanderemilcar",
 }, 
 {
-  name: "Twitter",
-  href: "https://www.twitter.com/LuzvanderE"
+  name: "X-twitter",
+  href: "https://x.com/LuzvanderE"
 },
 {
   name: "LinkedIn",

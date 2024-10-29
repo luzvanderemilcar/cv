@@ -1,18 +1,23 @@
-import {contact} from "/cvData.js";
+import dataModel from "/cvData.js";
 
 import getIcon from '/utils/getIcon.js';
 import icons from '/assets/icons.js';
 
-import { Model, View, Controller } from '/utils/view.js';
+import { createFooter } from '/utils/view.js';
 
-const contactModel = new Model(contact);
-
-const contactView = new View();
-
-let controler = new Controller(contactModel, contactView);
-
+let {contact} = dataModel;
 
 let contactWrapper = document.querySelector("div.contact");
+let contactWrapperFragment = document.createDocumentFragment();
+
+let footerElement = document.querySelector("footer");
+let footerFragment = document.createDocumentFragment();
+
+createContactCard(contact, contactWrapperFragment);
+createFooter(dataModel, footerFragment);
+
+contactWrapper.appendChild(contactWrapperFragment);
+footerElement.appendChild(footerFragment);
 
 function createContactCard(contactData, container) {
 for (let link in contactData) {
@@ -35,7 +40,3 @@ function formatContactLink(link, container) {
   
   container.appendChild(linkElement)
 }
-
-createContactCard(contact, contactWrapper);
-
-const footer = document.querySelector("footer");

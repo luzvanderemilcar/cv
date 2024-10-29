@@ -5,53 +5,11 @@ import {titlecase, uppercase, lowercase , capitalcase} from '/utils/case.js';
 let sectionHeadingTag = "h4";
 let listHeadingTag = "h5";
 
-// Model
-class Model {
-  data;
-  constructor(data = {}) {
-    this.data = data;
-  }
-
-  fetchData() {
-    this.data = getData();
-  }
-}
-
-// View 
-class View {
-  model;
-  setModel(newModel) {
-    this.model = newModel;
-  }
-
-  render() {
-    const template = createTemplate(this.model.data);
-    document.body.innerHTML = "";
-    document.body.appendChild(template);
-  }
-}
-
-// Controller
-class Controller {
-  constructor(model, view) {
-    this.model = model;
-    this.view = view;
-  }
-
-  init() {
-    // this.model.fetchData();
-    this.view.setModel(this.model);
-    this.view.render();
-  }
-}
-
-function createTemplate(sampleData) {
-  let templateFragment = document.createDocumentFragment();
-
-  createHeader(sampleData, templateFragment);
-  createTemplateBody(sampleData, templateFragment);
-  createFooter(sampleData, templateFragment);
-  return templateFragment;
+function createTemplate(sampleData, globalContainer) {
+  
+  createHeader(sampleData, globalContainer);
+  createTemplateBody(sampleData, globalContainer);
+  createFooter(sampleData, globalContainer);
 }
 
 function createHeader(sampleData, wrapper) {
@@ -79,9 +37,13 @@ function createHeader(sampleData, wrapper) {
              </div>
            </div>`;
 
-  header.appendChild(navBar);
-
-  header.innerHTML += `<div id="titre-info">
+ // header.appendChild(navBar);
+ createResumePhoto(sampleData, header);
+ 
+ let titreInfo = document.createElement("div");
+ titreInfo.setAttribute("id", "titre-info");
+ 
+ titreInfo.innerHTML = `
         <div>
           <div class="separator-div"></div>
         </div>
@@ -90,9 +52,9 @@ function createHeader(sampleData, wrapper) {
           <hr>
           <ul class="titles">
           </ul>
-        </div>
-      </div>`;
-
+        </div>`;
+        header.appendChild(titreInfo);
+        
   let headerListElement = header.querySelector("ul.titles");
 
   titles?.forEach(title => {
@@ -102,16 +64,18 @@ function createHeader(sampleData, wrapper) {
     headerListElement.append(listItem);
   });
 
-  wrapper.appendChild(header)
+  wrapper.appendChild(header);
 }
 
 function createTemplateBody(sampleData, wrapper) {
   let { sections } = sampleData?.mainContent;
 
   let mainElement = document.createElement("main");
+wrapper.appendChild(mainElement);
 
   sections?.forEach(section => {
     if (!section.disabled) {
+      
       if (/education/gi.test(section.title)) {
         createEducationSection(section, mainElement);
       } else {
@@ -119,8 +83,6 @@ function createTemplateBody(sampleData, wrapper) {
       }
     }
   });
-  
-  wrapper.appendChild(mainElement);
   
   //To  to button
   let goTopElement = document.createElement("button");
@@ -130,22 +92,35 @@ function createTemplateBody(sampleData, wrapper) {
   wrapper.appendChild(goTopElement);
 }
 
-function createResumePhoto(sectionData, wrapper) {
+function createResumePhoto(dataModel, wrapper) {
+  let {header: headerData} = dataModel;
+  
   let mainPhoto = document.createElement("img");
   mainPhoto.setAttribute("class", "main-photo");
-  mainPhoto.setAttribute("src", sectionData.photo);
-  mainPhoto.setAttribute("alt", `photo of ${ sectionData.title}`);
+  mainPhoto.setAttribute("src", headerData.photo);
+  mainPhoto.setAttribute("alt", `photo of ${ headerData.name}`);
   wrapper.appendChild(mainPhoto);
+}
+
+function createSectionPhoto(sectionData, wrapper) {
+  
+let sectionPhoto = document.createElement("img");
+sectionPhoto.setAttribute("class", "section-photo");
+sectionPhoto.setAttribute("src", headerData.photo);
+sectionPhoto.setAttribute("alt", `photo of ${ headerData.title}`);
+wrapper.appendChild(sectionPhoto);
 }
 
 function createEducationSection(sectionData, wrapper) {
   let {title, lists} = sectionData;
   
+  let sectionFragment = document.createDocumentFragment();
   let sectionElement = document.createElement("section");
+  
   sectionElement.setAttribute("class", "container-fluid dark-section");
   sectionElement.setAttribute("id", title.toLowerCase());
 
-  createSectionHeader(sectionData, sectionElement);
+  createSectionHeader(sectionData, sectionFragment);
   
     if (lists) {
     let educationListWrapper = document.createElement("div");
@@ -154,8 +129,10 @@ function createEducationSection(sectionData, wrapper) {
       createEducationList(list, educationListWrapper);
     });
     
-    sectionElement.appendChild(educationListWrapper);
+    sectionFragment.appendChild(educationListWrapper);
   }
+  sectionElement.appendChild(sectionFragment);
+
   wrapper.appendChild(sectionElement)
 }
 
@@ -206,23 +183,23 @@ function createSection(sectionData, wrapper) {
   let { title, cpAbv : cp, photo, lists, hasChart, data } = sectionData;
 
   let sectionElement = document.createElement("section");
+  let sectionFragment = document.createDocumentFragment();
+  
   sectionElement.setAttribute("class", "container");
   if (title) {
     sectionElement.setAttribute("id", title.toLowerCase());
   }
 
-  createSectionHeader(sectionData, sectionElement);
+  createSectionHeader(sectionData, sectionFragment);
   
  if (hasChart && data) {
   let svgGraphContainer = document.createElement("div");
   svgGraphContainer.setAttribute("class", `${cp} bar-chart`);
- sectionElement.appendChild(svgGraphContainer);
-
-setChart(sectionData);
+ sectionFragment.appendChild(svgGraphContainer);
 }
         
-    if (/resume|summary/gi.test(title) && photo) {
-          createResumePhoto(sectionData, sectionElement);
+    if (photo) {
+          createSectionPhoto(sectionData, sectionFragment);
         }
 
   //Format lists info
@@ -233,8 +210,10 @@ setChart(sectionData);
     lists.forEach(list => {
       createSectionList(list, sectionListWrapper);
     });
-    sectionElement.appendChild(sectionListWrapper);
+    sectionFragment.appendChild(sectionListWrapper);
   }
+  sectionElement.appendChild(sectionFragment);
+  
   wrapper.appendChild(sectionElement);
 }
 
@@ -355,7 +334,7 @@ function createFooter(sampleData, container) {
   footerElement.appendChild(hrElement);
 
   let copyRightElement = document.createElement("div");
-  copyRightElement.setAttribute("id", "copyriht-info");
+  copyRightElement.setAttribute("id", "copyright-info");
   let copyrightPeriod = document.createElement("h6");
   copyrightPeriod.setAttribute("class", "date-year");
 
@@ -377,6 +356,18 @@ linkElement.setAttribute("class", "footer-link");
   }
 }
 
+function addChartToDoucument(dataModel) {
+  let {sections} = dataModel.mainContent;
+  
+  sections.forEach(section => {
+    let {hasChart, data, disabled} = section;
+    if (!disabled) {
+    if (hasChart && data) {
+      setChart(section);
+    }
+    }
+  });
+}
 // D3 graphic Bar chart
 function setChart(sectionData) {
   let { data, title, cpAbv : cp } = sectionData;
@@ -490,4 +481,4 @@ const color = { whiteColor: "white", mainColor: "#020202", redColor: "#f00", yel
     .call(xAxis);
 }
 
-export { Model, View, Controller }
+export {createTemplate,createFooter, addChartToDoucument}
