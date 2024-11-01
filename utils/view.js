@@ -1,12 +1,12 @@
 import getIcon from '/utils/getIcon.js';
 import icons from '/assets/icons.js';
-import {titlecase, uppercase, lowercase , capitalcase} from '/utils/case.js';
+import { titlecase, uppercase, lowercase, capitalcase } from '/utils/case.js';
 
-let sectionHeadingTag = "h4";
-let listHeadingTag = "h5";
+let sectionHeadingTag = "h3";
+let listHeadingTag = "h4";
 
-function createTemplate(sampleData, globalContainer) {
-  
+async function createTemplate(sampleData, globalContainer) {
+
   createHeader(sampleData, globalContainer);
   createTemplateBody(sampleData, globalContainer);
   createFooter(sampleData, globalContainer);
@@ -14,36 +14,18 @@ function createTemplate(sampleData, globalContainer) {
 
 function createHeader(sampleData, wrapper) {
   
-  
   let { name, list, titles } = sampleData.header;
 
-  let header = document.createElement("header");
+  let header = document.querySelector("header");
   header.setAttribute("class", "container-fluid dark-section");
   header.setAttribute("id", "titre");
 
-  // NavBar
-  const navBar = document.createElement("nav");
-  navBar.setAttribute("class", "navbar navbar-expand-lg navbar-dark");
+  createResumePhoto(sampleData, header);
 
-  navBar.innerHTML = `
-           <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
-             <span class="navbar-toggler-icon"></span>
-           </button>
-           <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-             <div class="navbar-nav">
-               <a class="nav-item nav-link" href="index.html">Acceuil</a>
-               <a class="nav-item nav-link" href="contact.html">Contact</a>
-               <a class="nav-item nav-link disabled" href="#">@luzvanderemilcar</a>
-             </div>
-           </div>`;
+  const titreInfo = document.createElement("div");
+  titreInfo.setAttribute("id", "titre-info");
 
- // header.appendChild(navBar);
- createResumePhoto(sampleData, header);
- 
- let titreInfo = document.createElement("div");
- titreInfo.setAttribute("id", "titre-info");
- 
- titreInfo.innerHTML = `
+  titreInfo.innerHTML = `
         <div>
           <div class="separator-div"></div>
         </div>
@@ -53,9 +35,8 @@ function createHeader(sampleData, wrapper) {
           <ul class="titles">
           </ul>
         </div>`;
-        header.appendChild(titreInfo);
-        
-  let headerListElement = header.querySelector("ul.titles");
+
+  let headerListElement = titreInfo.querySelector("ul.titles");
 
   titles?.forEach(title => {
     let listItem = document.createElement("li");
@@ -64,6 +45,7 @@ function createHeader(sampleData, wrapper) {
     headerListElement.append(listItem);
   });
 
+  header.appendChild(titreInfo);
   wrapper.appendChild(header);
 }
 
@@ -71,11 +53,11 @@ function createTemplateBody(sampleData, wrapper) {
   let { sections } = sampleData?.mainContent;
 
   let mainElement = document.createElement("main");
-wrapper.appendChild(mainElement);
+  wrapper.appendChild(mainElement);
 
   sections?.forEach(section => {
     if (!section.disabled) {
-      
+
       if (/education/gi.test(section.title)) {
         createEducationSection(section, mainElement);
       } else {
@@ -83,18 +65,18 @@ wrapper.appendChild(mainElement);
       }
     }
   });
-  
+
   //To  to button
   let goTopElement = document.createElement("button");
   goTopElement.classList.add("to-top")
   goTopElement.innerHTML = getIcon(icons, "uparrow");
 
-  wrapper.appendChild(goTopElement);
+  mainElement.appendChild(goTopElement);
 }
 
 function createResumePhoto(dataModel, wrapper) {
-  let {header: headerData} = dataModel;
-  
+  let { header: headerData } = dataModel;
+
   let mainPhoto = document.createElement("img");
   mainPhoto.setAttribute("class", "main-photo");
   mainPhoto.setAttribute("src", headerData.photo);
@@ -103,32 +85,32 @@ function createResumePhoto(dataModel, wrapper) {
 }
 
 function createSectionPhoto(sectionData, wrapper) {
-  
-let sectionPhoto = document.createElement("img");
-sectionPhoto.setAttribute("class", "section-photo");
-sectionPhoto.setAttribute("src", headerData.photo);
-sectionPhoto.setAttribute("alt", `photo of ${ headerData.title}`);
-wrapper.appendChild(sectionPhoto);
+
+  let sectionPhoto = document.createElement("img");
+  sectionPhoto.setAttribute("class", "section-photo");
+  sectionPhoto.setAttribute("src", headerData.photo);
+  sectionPhoto.setAttribute("alt", `photo of ${ headerData.title}`);
+  wrapper.appendChild(sectionPhoto);
 }
 
 function createEducationSection(sectionData, wrapper) {
-  let {title, lists} = sectionData;
-  
+  let { title, lists } = sectionData;
+
   let sectionFragment = document.createDocumentFragment();
   let sectionElement = document.createElement("section");
-  
+
   sectionElement.setAttribute("class", "container-fluid dark-section");
   sectionElement.setAttribute("id", title.toLowerCase());
 
   createSectionHeader(sectionData, sectionFragment);
-  
-    if (lists) {
+
+  if (lists) {
     let educationListWrapper = document.createElement("div");
 
     lists.forEach(list => {
       createEducationList(list, educationListWrapper);
     });
-    
+
     sectionFragment.appendChild(educationListWrapper);
   }
   sectionElement.appendChild(sectionFragment);
@@ -137,33 +119,33 @@ function createEducationSection(sectionData, wrapper) {
 }
 
 function createEducationList(list, wrapper) {
-  let { heading, schoolName, startTime, endTime, diploma} = list;
+  let { heading, schoolName, startTime, endTime, diploma } = list;
 
   let sectionListContainer = document.createElement("div");
   sectionListContainer.setAttribute("class", "subsection education")
 
   //Format list heading
-    let headingElement = document.createElement(listHeadingTag);
-let schoolElement = document.createElement("p");
+  let headingElement = document.createElement(listHeadingTag);
+  let schoolElement = document.createElement("p");
 
-    let hrElement = document.createElement("hr");
-    hrElement.classList.add("heading-base");
-    
-    sectionListContainer.appendChild(headingElement);
-    sectionListContainer.appendChild(schoolElement);
-    sectionListContainer.appendChild(hrElement);
+  let hrElement = document.createElement("hr");
+  hrElement.classList.add("heading-base");
+
+  sectionListContainer.appendChild(headingElement);
+  sectionListContainer.appendChild(schoolElement);
+  sectionListContainer.appendChild(hrElement);
 
   for (let key in list) {
     if (isHeadingKey(key))
-    headingElement.innerHTML = list[key]
+      headingElement.innerHTML = list[key]
     if (isSchoolKey(key)) schoolElement.innerHTML = `<em>${titlecase(list[key])}</em>`;
-    
+
     if (!isHeadingKey(key) && !isSchoolKey(key) && !isBoolean(list[key])) {
-    let keyParagraph = document.createElement("p");
-keyParagraph.innerHTML = `<strong>${capitalcase(key)}</strong> : ${list[key]}`;
-sectionListContainer.appendChild(keyParagraph);
-}
-}
+      let keyParagraph = document.createElement("p");
+      keyParagraph.innerHTML = `<strong>${capitalcase(key)}</strong> : ${list[key]}`;
+      sectionListContainer.appendChild(keyParagraph);
+    }
+  }
   wrapper.appendChild(sectionListContainer);
 }
 
@@ -176,31 +158,31 @@ function isSchoolKey(keyName) {
 }
 
 function isBoolean(value) {
-return value === true || value === false
+  return value === true || value === false
 }
 
 function createSection(sectionData, wrapper) {
-  let { title, cpAbv : cp, photo, lists, hasChart, data } = sectionData;
+  let { title, cpAbv: cp, photo, lists, hasChart, data } = sectionData;
 
   let sectionElement = document.createElement("section");
   let sectionFragment = document.createDocumentFragment();
-  
+
   sectionElement.setAttribute("class", "container");
   if (title) {
     sectionElement.setAttribute("id", title.toLowerCase());
   }
 
   createSectionHeader(sectionData, sectionFragment);
-  
- if (hasChart && data) {
-  let svgGraphContainer = document.createElement("div");
-  svgGraphContainer.setAttribute("class", `${cp} bar-chart`);
- sectionFragment.appendChild(svgGraphContainer);
-}
-        
-    if (photo) {
-          createSectionPhoto(sectionData, sectionFragment);
-        }
+
+  if (hasChart && data) {
+    let svgGraphContainer = document.createElement("div");
+    svgGraphContainer.setAttribute("class", `${cp} bar-chart`);
+    sectionFragment.appendChild(svgGraphContainer);
+  }
+
+  if (photo) {
+    createSectionPhoto(sectionData, sectionFragment);
+  }
 
   //Format lists info
 
@@ -213,7 +195,7 @@ function createSection(sectionData, wrapper) {
     sectionFragment.appendChild(sectionListWrapper);
   }
   sectionElement.appendChild(sectionFragment);
-  
+
   wrapper.appendChild(sectionElement);
 }
 
@@ -316,7 +298,7 @@ function unifyElementArr(item) {
 
 function createFooter(sampleData, container) {
   let { links, copyright } = sampleData?.footer;
-  
+
   let footerElement = document.createElement("footer");
 
   let linkWrapper = document.createElement("div");
@@ -348,48 +330,48 @@ function createFooter(sampleData, container) {
 function formatFooterLink(link, wrapper) {
   let linkIcon = getIcon(icons, link.name);
   if (linkIcon) {
-  let linkElement = document.createElement("a");
-linkElement.setAttribute("class", "footer-link");
-  linkElement.setAttribute("href", link.href);
-  linkElement.innerHTML = `<span class="footer-icon">${linkIcon}</span><span arial-label=${link.name}></span>`;
-  wrapper.appendChild(linkElement);
+    let linkElement = document.createElement("a");
+    linkElement.setAttribute("class", "footer-link");
+    linkElement.setAttribute("href", link.href);
+    linkElement.innerHTML = `<span class="footer-icon">${linkIcon}</span><span arial-label=${link.name}></span>`;
+    wrapper.appendChild(linkElement);
   }
 }
 
 function addChartToDoucument(dataModel) {
-  let {sections} = dataModel.mainContent;
-  
+  let { sections } = dataModel.mainContent;
+
   sections.forEach(section => {
-    let {hasChart, data, disabled} = section;
+    let { hasChart, data, disabled } = section;
     if (!disabled) {
-    if (hasChart && data) {
-      setChart(section);
-    }
+      if (hasChart && data) {
+        setChart(section);
+      }
     }
   });
 }
 // D3 graphic Bar chart
 function setChart(sectionData) {
-  let { data, title, cpAbv : cp } = sectionData;
-  
+  let { data, title, cpAbv: cp } = sectionData;
+
   let dataLength = data?.length;
 
 
-// Grab the value of CSS variables 
-let bodyColor = getComputedStyle(document.body).getPropertyValue('--main-background-color');
-let detailColor = getComputedStyle(document.body).getPropertyValue('--soft-color');
+  // Grab the value of CSS variables 
+  let bodyColor = getComputedStyle(document.body).getPropertyValue('--main-background-color');
+  let detailColor = getComputedStyle(document.body).getPropertyValue('--soft-color');
 
-let sectionWidth = parseFloat(document.body.offsetWidth);
-let [w, padding, topPadding] = [300, 20, 40];
+  let sectionWidth = parseFloat(document.body.offsetWidth);
+  let [w, padding, topPadding] = [300, 20, 40];
 
-// Change the width according to viewport section
-if (sectionWidth < w) {
-  w = sectionWidth - 2.5 * padding;
-}
+  // Change the width according to viewport section
+  if (sectionWidth < w) {
+    w = sectionWidth - 2.5 * padding;
+  }
 
-let h = 0.75 * w;
+  let h = 0.75 * w;
 
-const color = { whiteColor: "white", mainColor: "#020202", redColor: "#f00", yellowColor: "yellow", greenColor: "#0f0" };
+  const color = { whiteColor: "white", mainColor: "#020202", redColor: "#f00", yellowColor: "yellow", greenColor: "#0f0" };
   //Setting the scale
   const xScale = d3.scaleLinear()
     .domain([0, 100])
@@ -398,7 +380,7 @@ const color = { whiteColor: "white", mainColor: "#020202", redColor: "#f00", yel
   const yScale = d3.scaleLinear()
     .domain([0, dataLength])
     .range([topPadding, h - padding]);
-    
+
   const svg = d3.select(`.${cp}.bar-chart`)
     .append("svg")
     .attr("class", "competence")
@@ -481,4 +463,4 @@ const color = { whiteColor: "white", mainColor: "#020202", redColor: "#f00", yel
     .call(xAxis);
 }
 
-export {createTemplate,createFooter, addChartToDoucument}
+export { createTemplate, createFooter, addChartToDoucument }

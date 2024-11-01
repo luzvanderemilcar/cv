@@ -24,6 +24,31 @@ body {
   margin: 0
 }
 
+header {
+  padding-top: 5rem !important;
+}
+
+nav {
+  position: fixed;
+  display: flex;
+  flex-direction: row;
+  align-items : center;
+  top: 0;
+  left : 0;
+  width: 100%;
+  height: 5rem;
+  border-bottom: 0.5px solid var(--primary-color, darkgray) ;
+}
+
+nav button {
+  justify-self: flex-end ;
+}
+h1 {
+  font-size: 1.5em;
+  margin: 0;
+  margin-left: 5%;
+}
+
 main {
   display: flex;
   flex-direction: column;
@@ -35,10 +60,6 @@ aside.full-width {
   height: 0;
 }
 
-section {
-  padding: 1.5em 2.5%;
-  margin-inline: 1rem;
-}
 
 section>div.section-description>p {
   margin-inline: 0.5rem;
@@ -53,10 +74,15 @@ li {
   margin-block: 0.5rem;
 }
 
+div:has(>.subsection) {
+  width: 100%;
+}
+
 .subsection {
   background-color: var(--white-color, white);
-  margin-block: 1rem;
-  padding: 1.5rem;
+  margin : 0;
+  margin-block : 1.5rem;
+  padding: 1rem;
   border-radius: 15px;
 }
 
@@ -65,13 +91,14 @@ li {
 }
 
 .container-fluid {
-  padding: 3% 7%;
+  width: calc(100% - 2*5%);
+  padding: 3% 5%;
 }
 
 .container {
-  /*width: 100%;*/
-  margin: auto 7px;
-  border-radius: 5px;
+  padding: 1.5rem 2.5%;
+  margin-inline: 0.5rem;
+  width: calc(100% - 5% - 1rem);
 }
 
 .container ul.list-head-section {
@@ -109,7 +136,7 @@ li {
   background-color: darkgray;
   color: var(--secondary-color, #020202);
   margin-bottom: 7%;
-padding: 5px;
+  padding: 5px;
   border-radius: 5px;
 }
 
@@ -134,7 +161,7 @@ padding: 5px;
   text-transform: uppercase;
 }
 
-.header-div h4 {
+.header-div h3 {
   margin: 0 0 0 1.5rem
 }
 
@@ -210,8 +237,8 @@ padding: 5px;
 
 #resume div.subsection {
   border-left: 2.5px solid var(--primary-color, darkgray);
-border-top-left-radius: 0;
-border-bottom-left-radius: 0;
+  border-top-left-radius: 0;
+  border-bottom-left-radius: 0;
 }
 
 /* Education section */
@@ -222,7 +249,7 @@ border-bottom-left-radius: 0;
 
 .subsection.education {
   color: var(--secondary-color, #020202);
-  margin-block: 1rem;
+  margin-inline: 0;
   padding: 1.5rem;
   border-radius: 0;
 }
@@ -361,8 +388,8 @@ div#copyright-info .date-year {
 
 /* Contact Page */
 .contact-me {
-  width: 75%;
-    margin: 1.5rem 1.5rem 2.5rem;
+  width: cal(100% - 2rem);
+  padding: 1.5rem 1rem 2rem;
 }
 
 .contact-me form {
@@ -386,25 +413,23 @@ div#copyright-info .date-year {
   right: 0;
 }
 
-div.contact {
+div.contact-info {
   background-color: var(--white-color, white);
-  width: 80%;
-  margin: 1.5rem auto;
-  padding: 1.5rem;
+  padding: 2rem 1rem;
   border-radius: 15px;
 }
 
-div.contact>h5 {
+div.contact-info>h5 {
   margin-bottom: 5%
 }
 
-div.contact a {
+div.contact-info a {
   display: block;
   margin-top: 10px;
   text-decoration: none;
   color: var(--dark-color, black);
 }
 
-div.contact a span {
+div.contact-info a span {
   margin-inline: 10px;
 }
