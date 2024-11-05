@@ -1,11 +1,13 @@
 import getIcon from '/utils/getIcon.js';
+import memoize from "/custom-hooks/memoize.js";
+const iconMemoize = memoize(getIcon)
+
 import icons from '/assets/icons.js';
 import { titlecase, uppercase, lowercase, capitalcase } from '/utils/case.js';
 
-let sectionHeadingTag = "h3";
-let listHeadingTag = "h4";
+let isBodyLoaded = false;
 
-async function createTemplate(sampleData, globalContainer) {
+function createTemplate(sampleData, globalContainer) {
 
   createHeader(sampleData, globalContainer);
   createTemplateBody(sampleData, globalContainer);
@@ -13,7 +15,7 @@ async function createTemplate(sampleData, globalContainer) {
 }
 
 function createHeader(sampleData, wrapper) {
-  
+
   let { name, list, titles } = sampleData.header;
 
   let header = document.querySelector("header");
@@ -66,12 +68,7 @@ function createTemplateBody(sampleData, wrapper) {
     }
   });
 
-  //To  to button
-  let goTopElement = document.createElement("button");
-  goTopElement.classList.add("to-top")
-  goTopElement.innerHTML = getIcon(icons, "uparrow");
-
-  mainElement.appendChild(goTopElement);
+  isBodyLoaded = true;
 }
 
 function createResumePhoto(dataModel, wrapper) {
@@ -125,7 +122,7 @@ function createEducationList(list, wrapper) {
   sectionListContainer.setAttribute("class", "subsection education")
 
   //Format list heading
-  let headingElement = document.createElement(listHeadingTag);
+  let headingElement = document.createElement("h4");
   let schoolElement = document.createElement("p");
 
   let hrElement = document.createElement("hr");
@@ -200,7 +197,7 @@ function createSection(sectionData, wrapper) {
 }
 
 function createSectionHeader(sectionData, sectionElement) {
-  let { icon, sectionHeading, description } = sectionData;
+  let { icon, sectionHeading, title, description } = sectionData;
   // Format section Header
   let sectionHeader = document.
   createElement("div");
@@ -216,9 +213,10 @@ function createSectionHeader(sectionData, sectionElement) {
 
   let headingContainer = document.createElement("div");
 
-  let headingElement = document.createElement(sectionHeadingTag);
+  let headingElement = document.createElement("h3");
 
   headingElement.innerHTML = sectionHeading;
+  headingElement.setAttribute("name", "heading");
   headingContainer.classList.add("header-text");
 
   headingContainer.appendChild(headingElement);
@@ -253,7 +251,7 @@ function createSectionList(list, wrapper) {
 
   //Format list heading
   if (heading) {
-    let headingElement = document.createElement(listHeadingTag);
+    let headingElement = document.createElement("h4");
     headingElement.innerHTML = heading;
 
     let hrElement = document.createElement("hr");
@@ -328,7 +326,7 @@ function createFooter(sampleData, container) {
 }
 
 function formatFooterLink(link, wrapper) {
-  let linkIcon = getIcon(icons, link.name);
+  let linkIcon = iconMemoize(icons, link.name);
   if (linkIcon) {
     let linkElement = document.createElement("a");
     linkElement.setAttribute("class", "footer-link");
@@ -338,7 +336,7 @@ function formatFooterLink(link, wrapper) {
   }
 }
 
-function addChartToDoucument(dataModel) {
+function addChartToDocument(dataModel) {
   let { sections } = dataModel.mainContent;
 
   sections.forEach(section => {
@@ -356,111 +354,110 @@ function setChart(sectionData) {
 
   let dataLength = data?.length;
 
+    // Grab the value of CSS variables 
+    let bodyColor = getComputedStyle(document.body).getPropertyValue('--main-background-color');
+    let detailColor = getComputedStyle(document.body).getPropertyValue('--soft-color');
 
-  // Grab the value of CSS variables 
-  let bodyColor = getComputedStyle(document.body).getPropertyValue('--main-background-color');
-  let detailColor = getComputedStyle(document.body).getPropertyValue('--soft-color');
+    let sectionWidth = parseFloat(document.body.offsetWidth);
+    let [w, padding, topPadding] = [300, 20, 40];
 
-  let sectionWidth = parseFloat(document.body.offsetWidth);
-  let [w, padding, topPadding] = [300, 20, 40];
+    // Change the width according to viewport section
+    if (sectionWidth < w) {
+      w = sectionWidth - 2.5 * padding;
+    }
 
-  // Change the width according to viewport section
-  if (sectionWidth < w) {
-    w = sectionWidth - 2.5 * padding;
-  }
+    let h = 0.75 * w;
 
-  let h = 0.75 * w;
+    const color = { whiteColor: "white", mainColor: "#020202", redColor: "#f00", yellowColor: "yellow", greenColor: "#0f0" };
+    //Setting the scale
+    const xScale = d3.scaleLinear()
+      .domain([0, 100])
+      .range([0, w - 2 * padding]);
 
-  const color = { whiteColor: "white", mainColor: "#020202", redColor: "#f00", yellowColor: "yellow", greenColor: "#0f0" };
-  //Setting the scale
-  const xScale = d3.scaleLinear()
-    .domain([0, 100])
-    .range([0, w - 2 * padding]);
+    const yScale = d3.scaleLinear()
+      .domain([0, dataLength])
+      .range([topPadding, h - padding]);
 
-  const yScale = d3.scaleLinear()
-    .domain([0, dataLength])
-    .range([topPadding, h - padding]);
+    const svg = d3.select(`.${cp}.bar-chart`)
+      .append("svg")
+      .attr("class", "competence")
+      .attr("width", w)
+      .attr("height", h)
+      .style("background-color", bodyColor);
 
-  const svg = d3.select(`.${cp}.bar-chart`)
-    .append("svg")
-    .attr("class", "competence")
-    .attr("width", w)
-    .attr("height", h)
-    .style("background-color", bodyColor);
+    svg.append("g")
+      .attr("class", "title");
 
-  svg.append("g")
-    .attr("class", "title");
+    svg.select(".title")
+      .append("text")
+      .html(title)
+      .attr("x", w / 2)
+      .attr("y", topPadding / 2)
+      .attr("text-anchor", "middle")
+      .attr("fill", "darkgray")
+      .attr("class", "graph-title")
+      .style("font-size", "1rem");
 
-  svg.select(".title")
-    .append("text")
-    .html(title)
-    .attr("x", w / 2)
-    .attr("y", topPadding / 2)
-    .attr("text-anchor", "middle")
-    .attr("fill", "darkgray")
-    .attr("class", "graph-title")
-    .style("font-size", "1rem");
+    // Rectangle element for data-key-name
+    svg.selectAll("rect")
+      .data(data)
+      .enter()
+      .append("rect")
+      .attr("width", w - 2 * padding)
+      .attr("height", h / (dataLength + padding * .75))
+      .attr("x", padding)
+      .attr("y", (d, i) => yScale(i))
+      .attr("fill", d => d[1] == 0 ? "none" : `${color.mainColor}`);
 
-  // Rectangle element for data-key-name
-  svg.selectAll("rect")
-    .data(data)
-    .enter()
-    .append("rect")
-    .attr("width", w - 2 * padding)
-    .attr("height", h / (dataLength + padding * .75))
-    .attr("x", padding)
-    .attr("y", (d, i) => yScale(i))
-    .attr("fill", d => d[1] == 0 ? "none" : `${color.mainColor}`);
+    // Path for triangle lever
+    svg.selectAll("path")
+      .data(data)
+      .enter()
+      .append("path")
+      .attr("d", (d, i) => {
+        if (d[1] > 0) {
+          return `M ${xScale(d[1]) + padding -7} ${yScale(i) - 8 } L${xScale(d[1]) + padding + 7} ${yScale(i) - 8} L${xScale(d[1]) + padding} ${yScale(i) + 6} z`;
+        }
+      })
+      .attr("fill", d => {
+        return d[1] == 0 ? "none" :
+          d[1] < 40 ? color.redColor :
+          d[1] > 40 && d[1] < 60 ? color.yellowColor :
+          color.greenColor;
+      })
+      .attr("stroke", color.yellowColor)
+      .attr("class", "triangle-lever");
 
-  // Path for triangle lever
-  svg.selectAll("path")
-    .data(data)
-    .enter()
-    .append("path")
-    .attr("d", (d, i) => {
-      if (d[1] > 0) {
-        return `M ${xScale(d[1]) + padding -7} ${yScale(i) - 8 } L${xScale(d[1]) + padding + 7} ${yScale(i) - 8} L${xScale(d[1]) + padding} ${yScale(i) + 6} z`;
-      }
-    })
-    .attr("fill", d => {
-      return d[1] == 0 ? "none" :
-        d[1] < 40 ? color.redColor :
-        d[1] > 40 && d[1] < 60 ? color.yellowColor :
-        color.greenColor;
-    })
-    .attr("stroke", color.yellowColor)
-    .attr("class", "triangle-lever");
+    //Key name text element
+    svg.selectAll("text.data-key-name")
+      .data(data)
+      .enter()
+      .append("text")
+      .attr("class", "data-key-name")
+      .text(d => d[0])
+      .attr("x", padding + 2)
+      .attr("y", (d, i) => yScale(i) + 8.5)
+      .attr("fill", d => d[0] == "TOOLS" ? color.mainColor : color.whiteColor)
+      .style("font-size", 10);
 
-  //Key name text element
-  svg.selectAll("text.data-key-name")
-    .data(data)
-    .enter()
-    .append("text")
-    .attr("class", "data-key-name")
-    .text(d => d[0])
-    .attr("x", padding + 2)
-    .attr("y", (d, i) => yScale(i) + 8.5)
-    .attr("fill", d => d[0] == "TOOLS" ? color.mainColor : color.whiteColor)
-    .style("font-size", 10);
-
-  // Setting percentage 
-  svg.selectAll("text.data-key-percent")
-    .data(data)
-    .enter()
-    .append("text")
-    .attr("class", "data-key-pourcent")
-    .text(d => d[1] == 0 ? '' : `${d[1]}%`)
-    .attr("x", d => xScale(d[1]) + padding + 7)
-    .attr("y", (d, i) => yScale(i) - 5)
-    .style("font-size", 8);
+    // Setting percentage 
+    svg.selectAll("text.data-key-percent")
+      .data(data)
+      .enter()
+      .append("text")
+      .attr("class", "data-key-pourcent")
+      .text(d => d[1] == 0 ? '' : `${d[1]}%`)
+      .attr("x", d => xScale(d[1]) + padding + 7)
+      .attr("y", (d, i) => yScale(i) - 5)
+      .style("font-size", 8);
 
 
-  // Setting the bottom axis
-  const xAxis = d3.axisBottom(xScale);
+    // Setting the bottom axis
+    const xAxis = d3.axisBottom(xScale);
 
-  svg.append("g")
-    .attr("transform", `translate(${padding}, ${h - padding})`)
-    .call(xAxis);
+    svg.append("g")
+      .attr("transform", `translate(${padding}, ${h - padding})`)
+      .call(xAxis);
 }
 
-export { createTemplate, createFooter, addChartToDoucument }
+export { createTemplate, createFooter, addChartToDocument }

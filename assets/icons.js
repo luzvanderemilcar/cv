@@ -15,7 +15,8 @@ const icons = {
   youtube: '<i class="fa-brands fa-youtube fa-lg"></i>',
 
   //Controls
-  bars: '<i class="fa-solid fa-bars"></i>',
+  bars: '<i class="fa-solid fa-bars fa-xl"></i>',
+  xmark: '<i class="fa-solid fa-xmark fa-xl"></i>',
   "elipsis-vertical" : '<i class="fa-solid fa-ellipsis-vertical"></i>',
   uparrow: '<i class="fa-solid fa-arrow-up"></i>',
   downarrow: '⬇️',

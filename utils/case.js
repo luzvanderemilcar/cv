@@ -19,30 +19,32 @@ function uppercase(text) {
 function lowercase(text) {
 
   if (isString(text)) return text.toLowerCase();
-  
+
   throw nonStringError(text);
 }
 
 function capitalcase(text) {
-  const capitalRegex = /(?<start>\w)(?<end>\w*)/;
+  const capitalRegex = /(?<start>^[a-z\u00C0-\u017F])(?<end>\w*)/;
+
   if (isString(text)) return text.replace(capitalRegex, (match, start, end, offset, input, groups) => {
     return `${groups.start.toUpperCase()}${groups.end.toLowerCase()}`;
   });
   throw nonStringError(text);
 }
 
-function titlecase(text) {
-  const titleRegex = /(?<start>\w)(?<end>\w*)/g;
-  if (isString(text)) {
-    return text.replace(titleRegex, (match, start, end, offset, input, groups) => {
-  return `${groups.start.toUpperCase()}${groups.end.toLowerCase()}`;
-});
-  }
+function titlecase(text, toleranceLength = 3) {
+
+  if (isString(text)) return text.split(/\s+/)
+    .map(word => {
+      if (word.length > toleranceLength) return capitalcase(word);
+      return word
+    })
+    .join(" ");
   throw nonStringError(text);
 }
 export {
   titlecase,
   uppercase,
-  lowercase, 
+  lowercase,
   capitalcase
 }

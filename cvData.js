@@ -37,7 +37,7 @@ const dataModel = {
             items: ["Travailler seul ou en équipe ;", "Gérer les clients ;", "Concevoir et appliquer des modèles dans la prise de décision ;", "Analyser les rapports financiers avec la comptabilité gestion ;", "Concevoir et réaliser des designs graphiques selon les demandes et les besoins du client ;", "Concevoir et développer des sites et des applications web."]
       }
       ],
-      hasChart: false
+        hasChart: false
       },
 
       {
@@ -48,22 +48,22 @@ const dataModel = {
         lists: [
           {
             heading: "Administration économique et sociale (AES)",
-            schoolName: "Ecole de Droit et des Sciences Economiques des Gonaives",
+            schoolName: "école de Droit et des Sciences économiques des Gonaives",
             // Variables keys
-            "Spécialisation" : "Gestion des entreprises",
+            "Spécialisation": "Gestion des entreprises",
             "Début": "2015",
             "Fin": "2019"
   },
           {
             heading: "Développement web",
             ecole: "FreeCodeCamp",
-            "Certification" : "Frond End Development Libraries",
+            "Certification": "Frond End Development Libraries",
             'Début': "2022"
 },
           {
             heading: "English Study",
             schoolName: "World English Institute",
-            'Courses' : "Elementary to Advanced Course",
+            'Courses': "Elementary to Advanced Course",
             "Début": "2024",
 }
         ],
@@ -105,7 +105,7 @@ const dataModel = {
         lists: [{
             heading: "HTML, CSS et JavaScript",
             introductoryPhrase: "Je peux travailler sur des projets de front-end développement pour créer des sites web réactifs, des applications web et autres.",
-            items: ["HTML : création du squelette du projet et de son contenu statique.", "CSS : designer l'interface de l'utilisateur avec les éléments graphiques et d'accessibilité.", "JavaScript : utiliser le langage pour gérer la réactivité par rapport à l'un isateur. Créer des algorithmes et des programmes pour le traitement des données."]
+            items: ["HTML : création du squelette du projet et de son contenu statique.", "CSS : designer l'interface de l'utilisateur avec les éléments graphiques et d'accessibilité.", "JavaScript : utiliser le langage pour gérer la réactivité des applications web à l'utilisateur. Créer des algorithmes et des programmes pour le traitement des données."]
   },
           {
             heading: "Visualisation de données",
@@ -148,21 +148,21 @@ const dataModel = {
         name: "Facebook",
         href: "https://www.facebook.com/@luzvanderemilcar",
     },
-    {
-  name: "Instagram",
-  href: "https://www.instagram.com/@luzvanderemilcar",
-}, 
-{
-  name: "X-twitter",
-  href: "https://x.com/LuzvanderE"
+      {
+        name: "Instagram",
+        href: "https://www.instagram.com/@luzvanderemilcar",
 },
-{
-  name: "LinkedIn",
-  href: "https://ht.linkedin.com/in/luzvanderemilcar"
+      {
+        name: "X-twitter",
+        href: "https://x.com/LuzvanderE"
 },
-{
-  name: "YouTube",
-  href: "https://www.youtube.com/@eltog"
+      {
+        name: "LinkedIn",
+        href: "https://ht.linkedin.com/in/luzvanderemilcar"
+},
+      {
+        name: "YouTube",
+        href: "https://www.youtube.com/@eltog"
 }
     ],
     copyright: {
@@ -174,6 +174,6 @@ const dataModel = {
 
 export default dataModel;
 
-let {header, contact, mainContent, footer} = dataModel;
+let { header, contact, mainContent, footer } = dataModel;
 
 export { header, contact, mainContent, footer };

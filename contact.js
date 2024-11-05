@@ -2,6 +2,8 @@ import dataModel from "/cvData.js";
 
 import getIcon from '/utils/getIcon.js';
 import icons from '/assets/icons.js';
+import memoize from "/custom-hooks/memoize.js";
+const iconMemoize = memoize(getIcon)
 
 import { createFooter } from '/utils/view.js';
 
@@ -51,8 +53,6 @@ sectionElement.appendChild(contactLinkWrapper);
 
 // contact form
 let contactFormContainer = document.createElement("div");
-
-let contactFormContainerFragment = document.createDocumentFragment();
 contactFormContainer.setAttribute("class", "contact-me");
 
 contactFormContainer.innerHTML = `
@@ -80,11 +80,11 @@ function formatContactLink(link, container) {
 };
 
   // format a link for the contact
-    let icon = getIcon(icons, link);
+    let icon = iconMemoize(icons, link);
     let linkElement = document.createElement("a");
   linkElement.setAttribute("class", link);
   linkElement.setAttribute("href", `${hrefPrefix[link] ? hrefPrefix[link] + contact[link]: link == "website" ? contact[link] : "#" }`);
-  linkElement.innerHTML = `<span>${getIcon(icons,link)}</span><span>${contact[link]}</span>`;
+  linkElement.innerHTML = `<span>${iconMemoize(icons,link)}</span><span>${contact[link]}</span>`;
   
-  container.appendChild(linkElement)
+  container.appendChild(linkElement);
 }

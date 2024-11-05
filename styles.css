@@ -21,11 +21,21 @@ html {
 
 body {
   background-color: var(--main-background-color, #F8F8F8);
-  margin: 0
+  margin: 0;
 }
 
 header {
   padding-top: 5rem !important;
+}
+
+button[type="submit"]{
+  color: var(--white-color, white);
+  background-color: var(--primary-color, black);
+  width: min(60px, 25%);
+  height: 40px;
+  border: none;
+  border-radius: 5px;
+  margin-right: 5px
 }
 
 nav {
@@ -33,15 +43,18 @@ nav {
   display: flex;
   flex-direction: row;
   align-items : center;
+  justify-content : space-between;
   top: 0;
   left : 0;
-  width: 100%;
+  right: 0;
   height: 5rem;
-  border-bottom: 0.5px solid var(--primary-color, darkgray) ;
+  padding-inline: 1rem;
+  border-bottom: 1px solid var(--yellow-color, darkgray);
+  z-index: 1;
 }
 
-nav button {
-  justify-self: flex-end ;
+nav div.first-heading {
+ flex: .35;
 }
 h1 {
   font-size: 1.5em;
@@ -49,15 +62,26 @@ h1 {
   margin-left: 5%;
 }
 
+nav div.toggler-container {
+  flex: .55;
+  display: flex;
+  justify-content: flex-end;
+  margin-right: 2rem
+}
+
+nav #sidebar-toggler {
+  display: none;
+  min-width: 40px;
+  height: 35px;
+  border-radius: 4px
+}
+
+
 main {
+  position: relative;
   display: flex;
   flex-direction: column;
   align-items: center;
-}
-
-aside.full-width {
-  visibility: hidden;
-  height: 0;
 }
 
 
@@ -285,7 +309,7 @@ button.cp-button.clicked {
 
 /* chart Bar*/
 
-.bar-chart {
+.bar-chart:not(:empty) {
   display: inline-block;
   margin-top: 10%;
   padding-bottom: 5%;
@@ -293,6 +317,7 @@ button.cp-button.clicked {
   border: 1px solid var(--soft-color);
   border-radius: 15%
 }
+
 
 .graph-title {
   font-family: "Montserrat";
@@ -305,6 +330,42 @@ button.cp-button.clicked {
   text-shadow: 0 0 black;
 }
 
+/* Aside Bar */
+
+aside#sidebar {
+  position: fixed;
+  top: 5rem;
+  right: 10px;
+  padding: 10px;
+  max-height: 75%;
+  color: var(--dark-color);
+  background-color: var(--white-color, white);
+  z-index: 2;
+  font-size: 0.85rem;
+  box-shadow: 0 5px 10px rgba(10, 10, 10, 0.15);
+  border-radius: 10px;
+  overflow-y: scroll;
+  overflow-x: hidden;
+}
+
+aside#sidebar a {
+  display: block;
+  width: calc(100% -7.5%);
+  padding-block: 7.5%;
+  height: auto;
+  text-decoration: none;
+  color: #000;
+  border-top: 1px solid var(--light-color,  lightgray);
+  border-radius: 0;
+  text-align: left;
+  font-size: 1rem;
+}
+
+aside#sidebar a:last-child {
+  border-bottom: 1px solid var(--light-color,  lightgray);
+}
+
+/* to Top */
 button.to-top {
   position: fixed;
   display: none;
@@ -320,6 +381,7 @@ button.to-top {
   font-size: 2rem;
   z-index: 1;
 }
+
 
 footer {
   text-align: center;
