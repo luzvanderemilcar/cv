@@ -1,9 +1,9 @@
-import getIcon from '/utils/getIcon.js';
-import memoize from "/custom-hooks/memoize.js";
+import getIcon from '/getIcon.js';
+import memoize from "/memoize.js";
 const iconMemoize = memoize(getIcon)
 
-import icons from '/assets/icons.js';
-import { titlecase, uppercase, lowercase, capitalcase } from '/utils/case.js';
+import icons from '/icons.js';
+import { titlecase, uppercase, lowercase, capitalcase } from '/case.js';
 
 let isBodyLoaded = false;
 

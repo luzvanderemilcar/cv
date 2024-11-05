@@ -9,6 +9,7 @@ import { createFooter } from '/view.js';
 
 let {contact} = dataModel;
 
+console.log("Sal ye laa a ?")
 export default function createContactSection({contact}, container) {
   let sectionElement = document.createElement("section");
 sectionElement.setAttribute("id", "contact");
