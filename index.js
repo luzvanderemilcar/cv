@@ -6,7 +6,6 @@ const iconMemoize = memoize(getIcon);
 import dataModel from "/cvData.js";
 import icons from '/icons.js';
 import { titlecase, uppercase, lowercase, capitalcase } from '/case.js';
-import createContactSection from '/contact.js';
 
 createTemplate(dataModel, document.body);
 
@@ -77,9 +76,6 @@ let scrollingDown;
 document.addEventListener("DOMContentLoaded", function() {
 
   let mainSectionElement = document.querySelector("main");
-
-
-  createContactSection(dataModel, mainSectionElement);
 
   //To  to button
   let toTopElement = document.createElement("button");
