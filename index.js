@@ -1,11 +1,11 @@
-import { createTemplate, addChartToDocument } from '/utils/view.js';
-import getIcon from '/utils/getIcon.js';
-import memoize from "/custom-hooks/memoize.js";
+import { createTemplate, addChartToDocument } from '/view.js';
+import getIcon from '/getIcon.js';
+import memoize from "/memoize.js";
 const iconMemoize = memoize(getIcon);
 
 import dataModel from "/cvData.js";
-import icons from '/assets/icons.js';
-import { titlecase, uppercase, lowercase, capitalcase } from '/utils/case.js';
+import icons from '/icons.js';
+import { titlecase, uppercase, lowercase, capitalcase } from '/case.js';
 import createContactSection from '/contact.js';
 
 createTemplate(dataModel, document.body);
