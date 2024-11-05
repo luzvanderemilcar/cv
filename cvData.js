@@ -1,4 +1,4 @@
-import icons from '/assets/icons.js';
+import icons from '/icons.js';
 
 const dataModel = {
   header: {
