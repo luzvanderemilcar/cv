@@ -1,4 +1,6 @@
-export default function getIcon(iconStock, iconName) {
+import memoize from "/memoize.js";
+
+function getIcon(iconStock, iconName) {
 
   //Remove case and space from input
   let iconNameProcessed = iconName.trim().toLowerCase();
@@ -12,3 +14,7 @@ export default function getIcon(iconStock, iconName) {
   // Default return
   return "";
 }
+
+const iconMemoize = memoize(getIcon);
+
+export default iconMemoize;

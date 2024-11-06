@@ -1,7 +1,5 @@
 import { createTemplate, addChartToDocument } from '/view.js';
-import getIcon from '/getIcon.js';
-import memoize from "/memoize.js";
-const iconMemoize = memoize(getIcon);
+import iconMemoize from '/getIcon.js';
 
 import dataModel from "/cvData.js";
 import icons from '/icons.js';
@@ -105,18 +103,31 @@ document.addEventListener("DOMContentLoaded", function() {
     });
     sideBarToggler.addEventListener("click" , toggleSideBar);
     sideBarToggler.style.display = "unset";
+    
+    // //Track click outside the Sidebar when it pops up 
+  let bodyOverlayingDiv = document.createElement("div");
+  
+  bodyOverlayingDiv.setAttribute("class", "overlay");
+  bodyOverlayingDiv.addEventListener("click", () => {hideSideBar()});
+document.body.appendChild(bodyOverlayingDiv);
     }
 
   createSideBar()
  
   function showSideBar() {
+        sideBarToggler.innerHTML = iconMemoize(icons, "xmark");
     sideBar.removeAttribute("hidden");
-    sideBarToggler.innerHTML = iconMemoize(icons, "xmark");
+    
+    let bodyOverlayingDiv = document.querySelector(".overlay");
+bodyOverlayingDiv.style.display = "block";
   }
   
 function hideSideBar() {
-  sideBar.setAttribute("hidden", "hidden");
+  
 sideBarToggler.innerHTML = iconMemoize(icons, "bars");
+sideBar.setAttribute("hidden", "hidden");
+let bodyOverlayingDiv = document.querySelector(".overlay");
+bodyOverlayingDiv.style.display = "none";
 }
 
 function toggleSideBar() {
@@ -130,8 +141,11 @@ function toggleSideBar() {
 
  function scrollToInternalLink(e) {
    e.preventDefault();
-   
- let targetElementSelector = e.target.getAttribute("href");
+let linkElement = e.target;
+linkElement.classList.add("clicked");
+setTimeout(()=>{linkElement.classList.remove("clicked");}, 250);
+
+ let targetElementSelector = linkElement.getAttribute("href");
  
  const targetElement = document.querySelector(targetElementSelector);
  const offset = document.querySelector('nav').offsetHeight;

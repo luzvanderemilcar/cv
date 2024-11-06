@@ -102,6 +102,11 @@ div:has(>.subsection) {
   width: 100%;
 }
 
+.clicked {
+  opacity: .45;
+  background-color: var(--light-color, lightgray);
+}
+
 .subsection {
   background-color: var(--white-color, white);
   margin : 0;
@@ -336,9 +341,9 @@ aside#sidebar {
   position: fixed;
   top: 5rem;
   right: 10px;
-  padding: 10px;
+  padding-block: 10px;
   max-height: 75%;
-  color: var(--dark-color);
+  color: var(--dark-color, black);
   background-color: var(--white-color, white);
   z-index: 2;
   font-size: 0.85rem;
@@ -350,11 +355,12 @@ aside#sidebar {
 
 aside#sidebar a {
   display: block;
-  width: calc(100% -7.5%);
-  padding-block: 7.5%;
+  width: 100%;
+  padding-block: .75rem;
+  padding-left: 1rem;
   height: auto;
   text-decoration: none;
-  color: #000;
+  color: var(--dark-color, black);
   border-top: 1px solid var(--light-color,  lightgray);
   border-radius: 0;
   text-align: left;
@@ -364,6 +370,21 @@ aside#sidebar a {
 aside#sidebar a:last-child {
   border-bottom: 1px solid var(--light-color,  lightgray);
 }
+
+aside#sidebar p {
+  margin-left: 15px;
+}
+
+.overlay {
+  display: none;
+  position: fixed;
+  width: 100vw;
+  height: 100vh;
+  top:0;
+  left: 0;
+  z-index: 1;
+}
+
 
 /* to Top */
 button.to-top {

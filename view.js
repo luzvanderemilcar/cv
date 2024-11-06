@@ -1,7 +1,4 @@
-import getIcon from '/getIcon.js';
-import memoize from "/memoize.js";
-const iconMemoize = memoize(getIcon)
-
+import iconMemoize from '/getIcon.js';
 import icons from '/icons.js';
 import { titlecase, uppercase, lowercase, capitalcase } from '/case.js';
 
@@ -64,13 +61,14 @@ function createTemplateBody(sampleData, wrapper) {
       if (/education/gi.test(section.title)) {
         createEducationSection(section, mainElement);
       } else {
-      createSection(section, mainElement);
-    }
+        createSection(section, mainElement);
+      }
     }
   });
-  
-  if (contact) { createContactSection(sampleData, mainElement);
-     }
+
+  if (contact) {
+    createContactSection(contact, mainElement);
+  }
 
   isBodyLoaded = true;
 }
@@ -297,7 +295,8 @@ function unifyElementArr(item) {
 }
 // Contact section
 
-function createContactSection({ contact }, container) {
+function createContactSection(contact, container) {
+
   let sectionElement = document.createElement("section");
   sectionElement.setAttribute("id", "contact");
   sectionElement.setAttribute("class", "container");
@@ -356,25 +355,20 @@ function createContactSection({ contact }, container) {
 }
 
 function createContactCard(contactData, container) {
-  for (let link in contactData) {
-    formatContactLink(link, container)
-  }
-}
-
-function formatContactLink(link, container) {
   let hrefPrefix = {
     telephone: "tel:",
     email: "mailto:"
   };
+  for (let link in contactData) {
 
-  // format a link for the contact
-  let icon = iconMemoize(icons, link);
-  let linkElement = document.createElement("a");
-  linkElement.setAttribute("class", link);
-  linkElement.setAttribute("href", `${hrefPrefix[link] ? hrefPrefix[link] + contact[link]: link == "website" ? contact[link] : "#" }`);
-  linkElement.innerHTML = `<span>${iconMemoize(icons,link)}</span><span>${contact[link]}</span>`;
+    // format a link for the contact
+    let linkElement = document.createElement("a");
+    linkElement.setAttribute("class", link);
 
-  container.appendChild(linkElement);
+    linkElement.setAttribute("href", `${hrefPrefix[link] ? hrefPrefix[link] + contactData[link]: link == "website" ? contactData[link] : "#" }`);
+    linkElement.innerHTML = `<span>${iconMemoize(icons,link)}</span><span>${contactData[link]}</span>`;
+    container.appendChild(linkElement);
+  }
 }
 
 //Footer
