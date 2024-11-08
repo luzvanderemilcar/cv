@@ -15,6 +15,33 @@
   --light-font: "Montserrat-Light";
 }
 
+@import url('https://fonts.googleapis.com/css2?family=Ubuntu:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&display=swap');
+
+.ubuntu-light {
+  font-family: "Ubuntu", sans-serif;
+  font-weight: 300;
+  font-style: normal;
+}
+
+.ubuntu-regular {
+  font-family: "Ubuntu", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+}
+
+.ubuntu-regular-italic {
+  font-family: "Ubuntu", sans-serif;
+  font-weight: 400;
+  font-style: italic;
+}
+
+.ubuntu-light-italic {
+  font-family: "Ubuntu", sans-serif;
+  font-weight: 300;
+  font-style: italic;
+}
+
+
 html {
   scroll-behavior: smooth;
 }
@@ -54,8 +81,9 @@ nav {
 }
 
 nav div.first-heading {
- flex: .35;
+ flex: .5;
 }
+
 h1 {
   font-size: 1.5em;
   margin: 0;
@@ -63,19 +91,20 @@ h1 {
 }
 
 nav div.toggler-container {
-  flex: .55;
+  flex: .15;
   display: flex;
-  justify-content: flex-end;
-  margin-right: 2rem
+  justify-content: center;
+  margin-right: 2rem;
+  border-left: 1px solid darkgray
 }
 
 nav #sidebar-toggler {
   display: none;
   min-width: 40px;
   height: 35px;
-  border-radius: 4px
+  border-radius: 4px;
+  border: none;
 }
-
 
 main {
   position: relative;
@@ -83,7 +112,6 @@ main {
   flex-direction: column;
   align-items: center;
 }
-
 
 section>div.section-description>p {
   margin-inline: 0.5rem;
@@ -338,9 +366,10 @@ button.cp-button.clicked {
 /* Aside Bar */
 
 aside#sidebar {
-  position: fixed;
+ position: fixed;
+  display: none;
   top: 5rem;
-  right: 10px;
+  width: calc(100% - 10px);
   padding-block: 10px;
   max-height: 75%;
   color: var(--dark-color, black);
@@ -471,29 +500,38 @@ div#copyright-info .date-year {
 
 /* Contact Page */
 .contact-me {
-  width: cal(100% - 2rem);
+  width: cal(100% - 2rem - 2px);
   padding: 1.5rem 1rem 2rem;
+  border-radius : 15px;
+  border: 1px solid var(--dark-color, black);
 }
 
 .contact-me form {
-  position: relative;
+  display: flex;
+  flex-direction: column;
   width: 100%;
+  margin-top: 1.5rem;
 }
 
+.contact-me hr {
+  height: 1px;
+  color: #000;
+  border-top: 1px solid var(--dark-color, black) !important;
+}
 .contact-me form .input-field {
   display: block;
-  margin-block: 5px;
-  width: calc(100% - 6px);
-  border-width: 1px;
+  padding-inline: 5px;
+  width: calc(100% - 10px);
+  border: none;
 }
 
 .contact-me form input {
-  height: 30px;
+  height: 40px;
 }
 
 .contact-me form button {
-  position: absolute;
-  right: 0;
+  margin-top: 10px;
+  align-self: flex-end;
 }
 
 div.contact-info {

@@ -83,12 +83,14 @@ document.addEventListener("DOMContentLoaded", function() {
   mainSectionElement.appendChild(toTopElement);
 
   //Add SVG graphic to document
- // addChartToDocument(dataModel);
+  addChartToDocument(dataModel);
   
   //SideBar
  function createSideBar() {
-    sideBar.setAttribute("id", "sidebar");
-    let sectionArr = document.querySelectorAll
+   const offset = document.querySelector('nav').offsetHeight;
+    sideBar.style.top = offset + "px";
+   
+    const sectionArr = document.querySelectorAll
     ("section");
     
     sectionArr.forEach(section => {
@@ -98,7 +100,7 @@ document.addEventListener("DOMContentLoaded", function() {
     link.setAttribute("href", "#" + sectionId);
     link.setAttribute("class", "internal-link");
     link.setAttribute("role", "button");
-   link.addEventListener("click", scrollToInternalLink);
+   link.addEventListener("click", handleInternalLinkClick);
     sideBar.appendChild(link);
     });
     sideBarToggler.addEventListener("click" , toggleSideBar);
@@ -116,8 +118,8 @@ document.body.appendChild(bodyOverlayingDiv);
  
   function showSideBar() {
         sideBarToggler.innerHTML = iconMemoize(icons, "xmark");
-    sideBar.removeAttribute("hidden");
-    
+
+sideBar.style.display = "block";
     let bodyOverlayingDiv = document.querySelector(".overlay");
 bodyOverlayingDiv.style.display = "block";
   }
@@ -125,21 +127,25 @@ bodyOverlayingDiv.style.display = "block";
 function hideSideBar() {
   
 sideBarToggler.innerHTML = iconMemoize(icons, "bars");
-sideBar.setAttribute("hidden", "hidden");
+sideBar.style.display = "none";
+
 let bodyOverlayingDiv = document.querySelector(".overlay");
 bodyOverlayingDiv.style.display = "none";
 }
 
 function toggleSideBar() {
+  let toggleBase = true;
+  
   // Based on html hidden attributes
-  if (sideBar.hasAttribute("hidden")) {
+  if (toggleBase) {
     showSideBar();
   } else {
     hideSideBar();
   }
+  toggleBase = !toggleBase;
 }
 
- function scrollToInternalLink(e) {
+ function handleInternalLinkClick(e) {
    e.preventDefault();
 let linkElement = e.target;
 linkElement.classList.add("clicked");

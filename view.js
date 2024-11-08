@@ -345,9 +345,14 @@ function createContactSection(contact, container) {
   contactFormContainer.innerHTML = `
       <h4>Message me</h4>
       <form id="contact-me-form">
-        <input class="input-field" type="text" name="senderName" placeholder="Your name" required>
-        <input class="input-field" type="email" name="senderEmail" placeholder="Your email" required>
-        <textarea class="input-field" name="senderMessage" cols="24" rows="10" name="senderMessage" placeholder="Message"></textarea>
+      <label for="sender-name">Name</label>
+        <input id="sender-name" class="input-field" type="text" name="senderName" placeholder="Enter name" required>
+        <hr/>
+        <label for="sender-email">Email</label>
+        <input id="sender-email"class="input-field" type="email" name="senderEmail" placeholder="Enter email" required>
+        <hr/>
+        <label for="sender-message">Message</label>
+        <textarea id="sender-message" class="input-field" name="senderMessage" cols="24" rows="10" name="senderMessage" placeholder="Type in your message"></textarea>
         <button type="submit">Send</button>
       </form>`;
 
