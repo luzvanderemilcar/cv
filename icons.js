@@ -1,13 +1,14 @@
 const icons = {
   telephone: '<i class="fa-solid fa-phone fa-lg"></i>',
   email: '<i class="fa-solid fa-envelope fa-lg"></i>',
-  fax: '📠',
-  website: '🌐',
+  fax: '<i class="fa-solid fa-fax fa-lg"></i>',
+  website: '<i class="fa-solid fa-globe fa-lg"></i>',
   location: '<i class="fa-solid fa-location-dot fa-lg" aria-hidden="true"></i>',
 
 // Social media
   facebook: '<i class="fa-brands fa-facebook-f fa-lg"></i>',
-  whatsapp: '',
+  whatsapp: '<i class="fa-brands fa-whatsapp fa-lg "></i>',
+  telegram : '<i class="fa-brands fa-telegram fa-lg "></i>',
   instagram: '<i class="fa-brands fa-instagram fa-lg "></i>',
   linkedin: '<i class="fa-brands fa-linkedin-in fa-lg"></i>',
   twitter: '<i class="fa-brands fa-twitter fa-lg"></i>',

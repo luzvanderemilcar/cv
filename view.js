@@ -2,8 +2,6 @@ import iconMemoize from '/getIcon.js';
 import icons from '/icons.js';
 import { titlecase, uppercase, lowercase, capitalcase } from '/case.js';
 
-let isBodyLoaded = false;
-
 function createTemplate(sampleData, globalContainer) {
 
   createHeader(sampleData, globalContainer);
@@ -69,8 +67,6 @@ function createTemplateBody(sampleData, wrapper) {
   if (contact) {
     createContactSection(contact, mainElement);
   }
-
-  isBodyLoaded = true;
 }
 
 function createResumePhoto(dataModel, wrapper) {
@@ -362,7 +358,8 @@ function createContactSection(contact, container) {
 function createContactCard(contactData, container) {
   let hrefPrefix = {
     telephone: "tel:",
-    email: "mailto:"
+    email: "mailto:",
+    website: "https://"
   };
   for (let link in contactData) {
 
@@ -370,8 +367,9 @@ function createContactCard(contactData, container) {
     let linkElement = document.createElement("a");
     linkElement.setAttribute("class", link);
 
-    linkElement.setAttribute("href", `${hrefPrefix[link] ? hrefPrefix[link] + contactData[link]: link == "website" ? contactData[link] : "#" }`);
-    linkElement.innerHTML = `<span>${iconMemoize(icons,link)}</span><span>${contactData[link]}</span>`;
+    linkElement.setAttribute("href", `${hrefPrefix[link] ? hrefPrefix[link] + contactData[link]: contactData[link]}`);
+    
+    linkElement.innerHTML = `<span>${iconMemoize(icons,link)}</span><span>${capitalcase(link)}</span>`;
     container.appendChild(linkElement);
   }
 }
@@ -439,7 +437,7 @@ function setChart(sectionData) {
   let dataLength = data?.length;
 
   // Grab the value of CSS variables 
-  let bodyColor = getComputedStyle(document.body).getPropertyValue('--main-background-color');
+  let bodyColor = getComputedStyle(document.body).getPropertyValue('--main-bg-color');
   let detailColor = getComputedStyle(document.body).getPropertyValue('--soft-color');
 
   let sectionWidth = parseFloat(document.body.offsetWidth);

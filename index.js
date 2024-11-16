@@ -13,72 +13,23 @@ sideBarToggler.innerHTML = iconMemoize(icons, "bars");
 
 const sideBar = document.querySelector("aside");
 const topView = document.querySelector("#titre");
-/*
-// Setting the width of the hr with .cp-hr class for competences switches
-$(".cp-hr").css("width", getWidthValue("button.cp-button"));
 
-function getWidthValue(selector) {
-  let value = 0;
-  document.querySelectorAll(selector).forEach((item) => {
-    value += parseFloat(item.offsetWidth + 10);
-  });
-  return value;
-}
-
-//Cilck event listener for competences switches 
-$(".cp-button").click(function() {
-  //Identify which button was clicked
-  let currentId = $(this).attr("id");
-
-  //Remove the clicked class from the last clicked button
-  if ($(".cp-button").hasClass("clicked")) {
-    $(".cp-button").removeClass("clicked");
-  }
-  $(this).addClass("clicked");
-  competenceSet(currentId);
-});
-
-//Content change based on ges, des or dev value
-function competenceSet(id) {
-  switch (id) {
-    case 'ges':
-    {
-      competences = gestionCompetences;
-      d3.select("#bar-chart").text("");
-      setChart(dataGestion);
-    }
-    break;
-    case 'des':
-    {
-      competences = designCompetences;
-      d3.select("#bar-chart").text("");
-      setChart(dataDesign);
-    }
-    break;
-    case 'dev':
-    {
-      competences = developmentCompetences;
-      d3.select("#bar-chart").text("");
-      setChart(dataDevelopment);
-    }
-    break;
-  }
-  $("#competence-body div").html(DOMPurify.sanitize(marked.parse(competences)));
-}
-*/
+const navBarHeight = navBar.offsetHeight;
 
 //Change the visibility of ToUp button
 let lastKnownScrollPosition = window.scrollY;
 let scrollingDown;
 
 document.addEventListener("DOMContentLoaded", function() {
-
+  
+topView.style.marginTop = `${navBarHeight}px`;
   let mainSectionElement = document.querySelector("main");
 
   //To  to button
   let toTopElement = document.createElement("button");
   toTopElement.classList.add("to-top")
   toTopElement.innerHTML = iconMemoize(icons, "uparrow");
+   
 
   mainSectionElement.appendChild(toTopElement);
 
@@ -87,8 +38,7 @@ document.addEventListener("DOMContentLoaded", function() {
   
   //SideBar
  function createSideBar() {
-   const offset = document.querySelector('nav').offsetHeight;
-    sideBar.style.top = offset + "px";
+    sideBar.style.top = `${navBarHeight}px`;
    
     const sectionArr = document.querySelectorAll
     ("section");
@@ -148,19 +98,25 @@ function toggleSideBar() {
  function handleInternalLinkClick(e) {
    e.preventDefault();
 let linkElement = e.target;
-linkElement.classList.add("clicked");
-setTimeout(()=>{linkElement.classList.remove("clicked");}, 250);
 
- let targetElementSelector = linkElement.getAttribute("href");
+visualClick(linkElement, 250);
+ let targetSelector = linkElement.getAttribute("href");
  
- const targetElement = document.querySelector(targetElementSelector);
- const offset = document.querySelector('nav').offsetHeight;
-const targetPosition = targetElement.getBoundingClientRect().top + window.scrollY - offset;
+ const targetElement = document.querySelector(targetSelector);
+ 
+const targetPosition = targetElement.getBoundingClientRect().top + window.scrollY - navBarHeight;
 window.scrollTo({ top: targetPosition, behavior: 'smooth' });
  }
   function hideNavBar() {
   navBar.style.display = "none";
 }
+
+//ContactLink
+document.querySelectorAll(".contact-info a").forEach(linkElement => {
+  linkElement.addEventListener("click", ()=> {
+    visualClick(linkElement);
+  })
+});
   
   document.addEventListener("scroll", () => {
 hideSideBar();
@@ -181,7 +137,17 @@ hideSideBar();
   toTopElement.addEventListener("click", scrollToTop);
 
   function scrollToTop(e) {
+    
+    visualClick(e.target);
+    
     // scroll to top at goTop click
-    topView.scrollIntoView();
+  let targetPosition = topView.getBoundingClientRect().top + window.scrollY - navBarHeight;
+window.scrollTo({ top: targetPosition, behavior: 'smooth' });
   }
 });
+
+// Show click
+function visualClick(linkElement, delay=250) {
+  linkElement.classList.add("clicked");
+  setTimeout(() => { linkElement.classList.remove("clicked"); }, delay);
+}

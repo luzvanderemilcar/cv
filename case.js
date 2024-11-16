@@ -32,6 +32,7 @@ function capitalcase(text) {
   throw nonStringError(text);
 }
 
+// toleranceLength : the maximum length for a word to be ignored (not capitalized)
 function titlecase(text, toleranceLength = 3) {
 
   if (isString(text)) return text.split(/\s+/)
@@ -42,6 +43,7 @@ function titlecase(text, toleranceLength = 3) {
     .join(" ");
   throw nonStringError(text);
 }
+
 export {
   titlecase,
   uppercase,

@@ -21,9 +21,11 @@ const dataModel = {
 
   contact: {
     telephone: "+50933321829",
+    whatsapp: "https://wa.me/message/HC7HI7PR7FHEF1",
+    telegram : "https://t.me/luzvanderemilcar",
     email: "luzvanderemilcar@gmail.com",
     fax: "659270082",
-    website: "index.html"
+    website: "/index.html"
   },
   mainContent: {
 

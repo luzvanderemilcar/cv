@@ -1,8 +1,10 @@
 :root {
   /*Color Variables*/
   --primary-color: #680000;
-  --main-background-color: #F0F0F0;
+  --main-bg-color: #F0F0F0;
   --dark-color: #020202;
+  --light-color: lightgray;
+  --click-bg-color: #BDBDBD;
   --soft-color: #F0F0F0;
   --white-color: #F5F5F5;
   --secondary-color: #444444;
@@ -47,15 +49,12 @@ html {
 }
 
 body {
-  background-color: var(--main-background-color, #F8F8F8);
+  background-color: var(--main-bg-color, #F8F8F8);
   margin: 0;
+  min-height: 100vh
 }
 
-header {
-  padding-top: 5rem !important;
-}
-
-button[type="submit"]{
+button[type="submit"] {
   color: var(--white-color, white);
   background-color: var(--primary-color, black);
   width: min(60px, 25%);
@@ -69,10 +68,10 @@ nav {
   position: fixed;
   display: flex;
   flex-direction: row;
-  align-items : center;
-  justify-content : space-between;
+  align-items: center;
+  justify-content: space-between;
   top: 0;
-  left : 0;
+  left: 0;
   right: 0;
   height: 5rem;
   padding-inline: 1rem;
@@ -81,13 +80,17 @@ nav {
 }
 
 nav div.first-heading {
- flex: .5;
+  flex: .5;
 }
 
 h1 {
-  font-size: 1.5em;
+  font-size: 1.35em;
   margin: 0;
-  margin-left: 5%;
+  margin-left: 10%;
+}
+
+h3 {
+  color: var(--dark-color, black);
 }
 
 nav div.toggler-container {
@@ -130,17 +133,22 @@ div:has(>.subsection) {
   width: 100%;
 }
 
+a:hover:not(.clicked) {
+   opacity: .5;
+ background-color: var(--light-color, lightgray);
+}
+
 .clicked {
-  opacity: .45;
-  background-color: var(--light-color, lightgray);
+  opacity: .25;
+  background-color: var(--click-bg-color, #BDBDBD);
 }
 
 .subsection {
   background-color: var(--white-color, white);
-  margin : 0;
-  margin-block : 1.5rem;
+  margin: 1.5rem 0;
   padding: 1rem;
   border-radius: 15px;
+  box-shadow: 0 5px 10px rgba(10, 10, 10, 0.05);
 }
 
 .subsection>h5 {
@@ -164,12 +172,12 @@ div:has(>.subsection) {
 
 .dark-section {
   background-color: var(--secondary-color, #020202);
-  color: var(--main-background-color, #f8f8f8);
+  color: var(--main-bg-color, #f8f8f8);
 }
 
 .light-section {
   color: var(--secondary-color, #020202);
-  background-color: var(--main-background-color, #f8f8f8);
+  background-color: var(--main-bg-color, #f8f8f8);
 }
 
 .big-heading {
@@ -211,11 +219,10 @@ div:has(>.subsection) {
 
 
 .header-div .header-text {
-  flex: .85;
+  flex: .8;
   justify-content: flex-start;
   margin: 0;
   line-height: unset;
-  text-transform: uppercase;
 }
 
 .header-div h3 {
@@ -280,7 +287,7 @@ div:has(>.subsection) {
 }
 
 #title-button-div {
-  background-color: var(--main-background-color, #F4F4F4);
+  background-color: var(--main-bg-color, #F4F4F4);
   width: 100%;
   padding: 7% 5%;
 }
@@ -311,35 +318,6 @@ div:has(>.subsection) {
   border-radius: 0;
 }
 
-
-
-/* Section Competences */
-
-button.cp-button {
-  margin: 5px;
-  box-shadow: unset;
-  background-color: var(--main-background-color, #F2F2F2);
-  color: var(--primary-color, #680000);
-  border-color: var(--primary-color, #680000);
-}
-
-button.cp-button.clicked {
-  background-color: var(--primary-color, #680000);
-  color: var(--main-background-color);
-}
-
-.cp-hr {
-  margin: 0;
-}
-
-#competence-body {
-  padding: inherit;
-}
-
-#competence-body div:not(#bar-chart) {
-  margin: 5% auto;
-}
-
 /* chart Bar*/
 
 .bar-chart:not(:empty) {
@@ -366,10 +344,11 @@ button.cp-button.clicked {
 /* Aside Bar */
 
 aside#sidebar {
- position: fixed;
+  position: fixed;
   display: none;
   top: 5rem;
-  width: calc(100% - 10px);
+  right: 10px;
+  width: calc(65% - 10px);
   padding-block: 10px;
   max-height: 75%;
   color: var(--dark-color, black);
@@ -384,20 +363,20 @@ aside#sidebar {
 
 aside#sidebar a {
   display: block;
-  width: 100%;
+  width: calc(100%-1.5rem);
   padding-block: .75rem;
-  padding-left: 1rem;
+  padding-left: 1.5rem;
   height: auto;
   text-decoration: none;
   color: var(--dark-color, black);
-  border-top: 1px solid var(--light-color,  lightgray);
+  border-top: 1px solid var(--light-color, lightgray);
   border-radius: 0;
   text-align: left;
   font-size: 1rem;
 }
 
 aside#sidebar a:last-child {
-  border-bottom: 1px solid var(--light-color,  lightgray);
+  border-bottom: 1px solid var(--light-color, lightgray);
 }
 
 aside#sidebar p {
@@ -409,7 +388,7 @@ aside#sidebar p {
   position: fixed;
   width: 100vw;
   height: 100vh;
-  top:0;
+  top: 0;
   left: 0;
   z-index: 1;
 }
@@ -436,7 +415,7 @@ button.to-top {
 footer {
   text-align: center;
   background-color: var(--secondary-color, #020202);
-  color: var(--main-background-color, white);
+  color: var(--main-bg-color, white);
   position: absolute;
   left: 0;
   right: 0;
@@ -494,23 +473,29 @@ div#copyright-info .date-year {
 
 @media print {
   body {
-    background-color: var(--main-background-color, #F8F8F8);
+    background-color: var(--main-bg-color, #F8F8F8);
   }
 }
 
 /* Contact Page */
 .contact-me {
-  width: cal(100% - 2rem - 2px);
-  padding: 1.5rem 1rem 2rem;
-  border-radius : 15px;
+  background-color : var(--white-color,  white);
+  width: cal(100% - 2px);
+  padding: 1.5rem 0 2rem;
+  margin-top: 1.5rem;
   border: 1px solid var(--dark-color, black);
+}
+
+.contact-me h4 {
+  margin-left : 1.5rem;
 }
 
 .contact-me form {
   display: flex;
   flex-direction: column;
-  width: 100%;
+  width: (100% -3rem);
   margin-top: 1.5rem;
+  padding: 1.5rem;
 }
 
 .contact-me hr {
@@ -518,6 +503,7 @@ div#copyright-info .date-year {
   color: #000;
   border-top: 1px solid var(--dark-color, black) !important;
 }
+
 .contact-me form .input-field {
   display: block;
   padding-inline: 5px;
@@ -553,4 +539,5 @@ div.contact-info a {
 
 div.contact-info a span {
   margin-inline: 10px;
+  color: var(--primary-color, black);
 }
