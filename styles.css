@@ -133,8 +133,7 @@ div:has(>.subsection) {
   width: 100%;
 }
 
-a:hover:not(.clicked) {
-   opacity: .5;
+a.hover:hover {
  background-color: var(--light-color, lightgray);
 }
 

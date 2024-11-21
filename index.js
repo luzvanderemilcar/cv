@@ -149,5 +149,7 @@ window.scrollTo({ top: targetPosition, behavior: 'smooth' });
 // Show click
 function visualClick(linkElement, delay=250) {
   linkElement.classList.add("clicked");
-  setTimeout(() => { linkElement.classList.remove("clicked"); }, delay);
+  setTimeout(() => {
+    linkElement.classList.remove("clicked", "hover");
+  }, delay);
 }
