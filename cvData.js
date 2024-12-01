@@ -24,8 +24,8 @@ const dataModel = {
     whatsapp: "https://wa.me/message/HC7HI7PR7FHEF1",
     telegram : "https://t.me/luzvanderemilcar",
     email: "luzvanderemilcar@gmail.com",
-    fax: "659270082",
-    website: "/index.html"
+    fax: "#",
+    website: "#"
   },
   mainContent: {
 
@@ -127,9 +127,9 @@ const dataModel = {
         cpAbv: "des",
         title: "Design",
         icon: icons?.listcheck,
-        description: "J'ai débuté dans le domaine du design graphique avec la production de design pour une entreprise de beauté. Mon approche du design est fonctionnelle, c'est-à-dire à la communication entre le commanditaire et les destinataires de son message.",
+        description: "Le design est un art, mais aussi une technique. Elle poursuit deux objectis : beauté et fonctionnalité. J'ai débuté dans le domaine du design graphique sans même savoir que je faisais du graphisme avec la production d'un graphique annonçant un événement. C'était une capture d'écran du programme, à laquelle j'ai ajouté du texte, et des lignes",
         lists: [{
-            heading: "Conception graphique",
+            heading: "Conception",
             introductoryPhrase: "Je peux concevoir et produire des flyers, dessiner des logos et des cartes de multiples dimensions pour différentes occasions, entre autres.",
             items: ["Flyer", "Carte (invitation, marriage, business,  ...)", "Logo", "Etiquette"],
   },
