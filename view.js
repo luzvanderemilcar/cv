@@ -342,10 +342,10 @@ function createContactSection(contact, container) {
       <h4>Message me</h4>
       <form id="contact-me-form">
       <label for="sender-name">Name</label>
-        <input id="sender-name" class="input-field" type="text" name="senderName" placeholder="Enter name" required>
+        <input id="sender-name" class="input-field" type="text" name="senderName" placeholder="Sample Example" required>
         <hr/>
         <label for="sender-email">Email</label>
-        <input id="sender-email"class="input-field" type="email" name="senderEmail" placeholder="Enter email" required>
+        <input id="sender-email"class="input-field" type="email" name="senderEmail" placeholder="sampleexample@email.com" required>
         <hr/>
         <label for="sender-message">Message</label>
         <textarea id="sender-message" class="input-field" name="senderMessage" cols="24" rows="10" name="senderMessage" placeholder="Type in your message"></textarea>

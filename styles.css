@@ -505,13 +505,13 @@ div#copyright-info .date-year {
 
 .contact-me form .input-field {
   display: block;
-  padding-inline: 5px;
-  width: calc(100% - 10px);
+  padding: 10px;
+  width: calc(100% - 20px);
   border: none;
 }
 
-.contact-me form input {
-  height: 40px;
+.contact-me label {
+  margin-bottom: 5px;
 }
 
 .contact-me form button {
