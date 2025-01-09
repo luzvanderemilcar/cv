@@ -4,6 +4,7 @@ import iconMemoize from '/getIcon.js';
 import dataModel from "/cvData.js";
 import icons from '/icons.js';
 import { titlecase, uppercase, lowercase, capitalcase } from '/case.js';
+import {PUBLIC_KEY, SERVICE_ID, TEMPLATE_ID} from '/secrets.js';
 
 createTemplate(dataModel, document.body);
 
@@ -152,4 +153,47 @@ function visualClick(linkElement, delay=250) {
   setTimeout(() => {
     linkElement.classList.remove("clicked", "hover");
   }, delay);
+}
+
+const contactForm = document.querySelector("form#contact-me-form");
+
+ contactForm.addEventListener("submit", handleContactFormSubmit);
+ 
+  (function() {
+   emailjs.init({
+     publicKey: 'PUBLIC_KEY',
+  // Do not allow headless browsers
+  blockHeadless: true,
+  blockList: {
+    // Block the suspended emails
+   // list: ['foo@emailjs.com', 'bar@emailjs.com'],
+    // The variable contains the email address
+    watchVariable: 'userEmail',
+  },
+  limitRate: {
+    // Set the limit rate for the application
+    id: 'app',
+    // Allow 1 request per 10s
+    throttle: 10000,
+  },
+   });
+ })();
+
+function handleContactFormSubmit(e) {
+  e.preventDefault();
+  
+  let {from_name, reply_to, message } = e.target.elements;
+  
+  emailjs.send(SERVICE_ID, TEMPLATE_ID, {
+    to_name: dataModel.header.name,
+    from_name : from_name.value,
+    reply_to : reply_to.value,
+    message: message.value
+  })
+  
+  .then(function(response) {
+    console.log('SUCCESS!', response.status, response.text);
+  }, function(error) {
+    console.log('FAILED...', error);
+  });
 }
